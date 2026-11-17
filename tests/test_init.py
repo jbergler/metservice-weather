@@ -15,9 +15,10 @@ from homeassistant.helpers import issue_registry as ir
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.metservice_weather import _async_migrate_legacy_unique_ids
-from custom_components.metservice_weather.const import DOMAIN
+from custom_components.metservice_weather.const import DOMAIN, HA_LOCATION
 from custom_components.metservice_weather.coordinator import WeatherUpdateCoordinator
 from custom_components.metservice_weather.coordinator_types import (
+    normalize_app_data,
     normalize_public_data,
 )
 
@@ -406,3 +407,43 @@ async def test_v09_migration_exception_does_not_block_setup(hass):
         await hass.async_block_till_done()
 
     assert entry.state is ConfigEntryState.LOADED
+
+
+_HA_LOCATION_ENTRY_DATA = {
+    **_PUBLIC_ENTRY_DATA,
+    "name": "RV",
+    "location": HA_LOCATION,
+    "api": "app",
+}
+
+
+async def test_ha_location_entry_keeps_its_name_and_every_sensor(hass):
+    """An entry following Home Assistant's location is named after its config, raises no legacy issue, and keeps station sensors where it currently has no station."""
+    entry = _make_entry(_HA_LOCATION_ENTRY_DATA)
+    entry.add_to_hass(hass)
+    raw = json.loads((_FIXTURES / "waitakere_app_weather.json").read_text())
+    data = normalize_app_data({**raw, "observationData": None, "forecastData": {}}, {})
+    assert data.has_observations is False
+    assert data.has_breakdown is False
+
+    async def _first_refresh(coordinator):
+        coordinator.data = data
+
+    with patch.object(
+        WeatherUpdateCoordinator,
+        "async_config_entry_first_refresh",
+        autospec=True,
+        side_effect=_first_refresh,
+    ):
+        assert await hass.config_entries.async_setup(entry.entry_id)
+        await hass.async_block_till_done()
+
+    assert ir.async_get(hass).async_get_issue(DOMAIN, _legacy_issue_id(entry)) is None
+    device = dr.async_get(hass).async_get_device_by_identifier(
+        (DOMAIN, HA_LOCATION), entry.entry_id
+    )
+    assert device.name == "RV"
+    assert device.model == "MetService App API"
+    assert hass.states.get("sensor.rv_temperature") is not None
+    assert hass.states.get("sensor.rv_condition_morning") is not None
+    assert hass.states.get("weather.rv_forecast") is not None

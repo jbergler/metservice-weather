@@ -9,6 +9,7 @@ from pathlib import Path
 
 import pytest
 
+from custom_components.metservice_weather.const import CONDITION_MAP
 from custom_components.metservice_weather.coordinator_types import (
     DailyEntry,
     HourlyEntry,
@@ -20,6 +21,7 @@ from custom_components.metservice_weather.coordinator_types import (
     _safe_float,
     _safe_int,
     _scan_forecasts,
+    normalize_app_data,
     normalize_public_data,
 )
 
@@ -1771,3 +1773,190 @@ def test_kumeu_fixture_new_fields_none_for_seasonal_absence(kumeu):
     assert kumeu.uv_window_start_raw is None
     assert kumeu.uv_window_end_raw is None
     assert isinstance(kumeu.sunrise_at, str)
+
+
+# ---------------------------------------------------------------------------
+# App API (following Home Assistant's location)
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture(scope="module")
+def waitakere_raw():
+    """Load the app API's weatherData result for Waitakere."""
+    return json.loads((FIXTURES / "waitakere_app_weather.json").read_text())
+
+
+def test_app_observations_fill_current_conditions(waitakere_raw):
+    """The app's observation strings become the numeric current-condition fields."""
+    obs = waitakere_raw["observationData"]
+    data = normalize_app_data(waitakere_raw, {})
+    assert data.temperature == float(obs["temperature"])
+    assert data.feels_like == float(obs["windChill"])
+    assert data.humidity == int(obs["relativeHumidity"])
+    assert data.pressure == float(obs["pressure"])
+    assert data.pressure_trend == obs["pressureTrend"]
+    assert data.wind_speed == float(obs["windSpeed"])
+    assert data.wind_gust == float(obs["windGustSpeed"])
+    assert data.wind_direction == obs["windDirection"]
+    assert data.wind_strength == obs["windDescription"]
+    assert data.rainfall == float(obs["rainfall"])
+    assert data.has_observations is True
+    assert data.location_name == "Waitakere"
+
+
+def test_app_stale_observations_are_not_reported_as_current(waitakere_raw):
+    """Observations the app flags as not current are dropped."""
+    raw = {
+        **waitakere_raw,
+        "observationData": {
+            **waitakere_raw["observationData"],
+            "isObservationCurrent": False,
+        },
+    }
+    data = normalize_app_data(raw, {})
+    assert data.temperature is None
+    assert data.has_observations is False
+
+
+def test_app_forecast_words_become_website_condition_tokens():
+    """App words like "Few showers" map onto the website's "few-showers" tokens."""
+    raw = {
+        "forecastData": {
+            "days": [
+                {
+                    "dateISO": "2026-11-17T12:00:00+13:00",
+                    "forecastWord": "Few showers",
+                    "partDayData": {
+                        "morning": {"forecastWord": "Partly cloudy"},
+                        "overnight": {"forecastWord": "Fine"},
+                    },
+                },
+                {"dateISO": "2026-11-18T12:00:00+13:00", "forecastWord": "Rain"},
+            ]
+        }
+    }
+    data = normalize_app_data(raw, {})
+    assert data.condition == "few-showers"
+    assert data.breakdown_morning == "partly-cloudy"
+    assert data.breakdown_afternoon is None
+    assert data.breakdown_overnight == "fine"
+    assert data.tomorrow_condition == "rain"
+    assert data.has_breakdown is True
+
+
+def test_app_fixture_conditions_are_all_mapped(waitakere_raw):
+    """Every condition the fixture produces is one the weather entity can map."""
+    data = normalize_app_data(waitakere_raw, {})
+    tokens = [d.condition for d in data.daily_entries] + [
+        data.breakdown_morning,
+        data.breakdown_afternoon,
+        data.breakdown_evening,
+        data.breakdown_overnight,
+    ]
+    assert [t for t in tokens if t not in CONDITION_MAP] == []
+
+
+def test_app_daily_entries_carry_temperatures_and_text(waitakere_raw):
+    """Each app day becomes a daily entry with its high, low and forecast text."""
+    days = waitakere_raw["forecastData"]["days"]
+    data = normalize_app_data(waitakere_raw, {})
+    assert len(data.daily_entries) == len(days)
+    first = data.daily_entries[0]
+    assert first.datetime == days[0]["dateISO"]
+    assert first.temp_high == float(days[0]["max"])
+    assert first.temp_low == float(days[0]["min"])
+    assert first.description == days[0]["forecast"]
+    assert data.temp_today_high == float(days[0]["max"])
+    assert data.issued_at == days[0]["issuedAtISO"]
+
+
+def test_app_hourly_series_puts_observed_hours_before_forecast(waitakere_raw):
+    """Observed hours come first and are skipped by the hourly forecast slice."""
+    observed = waitakere_raw["actualData"]
+    forecast = waitakere_raw["hourlyForecastData"]["data"]
+    data = normalize_app_data(waitakere_raw, {})
+    assert data.hourly_skip == len(observed)
+    assert data.hourly_obs == len(forecast)
+    first_forecast = data.hourly_entries[data.hourly_skip]
+    assert first_forecast.datetime == forecast[0]["dateISO"]
+    assert first_forecast.temperature == float(forecast[0]["temperature"])
+    assert first_forecast.rainfall == float(forecast[0]["rainFall"])
+    assert first_forecast.wind_speed == float(forecast[0]["windSpeed"])
+    assert first_forecast.wind_direction == forecast[0]["windDir"]
+
+
+def test_app_rain_outlook_sums_the_coming_forecast_hours(waitakere_raw):
+    """Rain over the next 8 and 24 hours is summed from the app's forecast hours."""
+    forecast = waitakere_raw["hourlyForecastData"]["data"]
+    now = datetime.fromisoformat(forecast[0]["dateISO"])
+    data = normalize_app_data(waitakere_raw, {}, now=now)
+    expected_24h = round(sum(float(h["rainFall"]) for h in forecast[:24]), 1)
+    assert data.rain_next_24h_mm == expected_24h
+    assert (
+        data.rain_forecast_horizon
+        == waitakere_raw["forecastData"]["days"][-1]["dateISO"]
+    )
+
+
+def test_app_uv_window_becomes_timestamps_on_the_forecast_day():
+    """The app's split "3:40" + "PM" UV times become timestamps on day 0."""
+    raw = {
+        "forecastData": {
+            "days": [
+                {
+                    "dateISO": "2026-11-17T12:00:00+13:00",
+                    "uvStartTime": "9:45",
+                    "uvStartTimeMeridian": "AM",
+                    "uvEndTime": "3:40",
+                    "uvEndTimeMeridian": "PM",
+                    "uvHasAlert": True,
+                    "uvMessage": "Protection Required",
+                }
+            ]
+        }
+    }
+    data = normalize_app_data(raw, {})
+    assert data.uv_window_start_raw == "9:45am"
+    assert data.uv_window_start_at == "2026-11-17T09:45:00+13:00"
+    assert data.uv_window_end_at == "2026-11-17T15:40:00+13:00"
+    assert data.uv_has_alert is True
+    assert data.uv_message == "Protection Required"
+    assert data.uv_alert_level is None
+
+
+def test_app_sun_moon_and_fire_fields(waitakere_raw):
+    """Rise/set timestamps, moon phase and fire weather come straight from the app."""
+    rise_set = waitakere_raw["riseSetData"]
+    fire = waitakere_raw["forecastData"]["days"][0]["fireWeather"]
+    data = normalize_app_data(waitakere_raw, {})
+    assert data.sunrise == rise_set["sunRise"]
+    assert data.sunrise_at == rise_set["sunRiseISO"]
+    assert data.moonset_at == rise_set["moonSetISO"]
+    assert data.moon_phase == waitakere_raw["moonPhases"][0]["phase"]
+    assert data.fire_danger_index == fire["danger"]["dailyObservationIndex"]
+    assert data.fire_season_status == fire["season"]["status"].lower()
+
+
+def test_app_supplementary_fields_pass_through(waitakere_raw):
+    """Warnings and drying the coordinator gathered reach the data unchanged."""
+    warnings = [{"name": "Heavy Rain Watch", "text": "Rain", "threat_period": "Now"}]
+    data = normalize_app_data(
+        waitakere_raw,
+        {
+            "warnings_list": warnings,
+            "weather_warnings": "Heavy Rain Watch, Rain, Now",
+            "drying_morning": "1 - 3 hrs",
+        },
+    )
+    assert data.warnings_list == warnings
+    assert data.weather_warnings == "Heavy Rain Watch, Rain, Now"
+    assert data.drying_morning == "1 - 3 hrs"
+
+
+def test_app_empty_result_normalises_to_empty_data():
+    """A result with nothing in it yields empty data rather than raising."""
+    data = normalize_app_data({}, {})
+    assert data.condition is None
+    assert data.daily_entries == []
+    assert data.hourly_entries == []
+    assert data.has_observations is False

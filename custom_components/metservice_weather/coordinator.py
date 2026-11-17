@@ -2,12 +2,17 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import timedelta
+from http import HTTPStatus
 import logging
 import re
 import asyncio
 import time
+from typing import Any
+from urllib.parse import parse_qs, urlsplit
 
 import aiohttp
 
@@ -22,13 +27,20 @@ from homeassistant.const import (
 )
 
 from .const import (
+    APP_API_HEADERS,
+    APP_API_URL,
     BASE_URL,
+    HA_LOCATION,
     TEMPUNIT,
     LENGTHUNIT,
     SPEEDUNIT,
     PRESSUREUNIT,
 )
-from .coordinator_types import MetServicePublicData, normalize_public_data
+from .coordinator_types import (
+    MetServicePublicData,
+    normalize_app_data,
+    normalize_public_data,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -51,6 +63,68 @@ _TRANSIENT_ERRORS = (
 _PERMANENT_ERRORS = (aiohttp.ClientSSLError,)
 
 _MARINE_REGION_SLUG_RE = re.compile(r"/marine/regions/([^/]+)/")
+
+# The app colours each pollen level; the website marks the same levels with
+# these status classes. Other colours pass through and get reported as unknown.
+_APP_POLLEN_CLASSES = {"GREEN": "good", "ORANGE": "medium", "RED": "bad"}
+
+
+@contextmanager
+def _raise_update_failed() -> Iterator[None]:
+    """Turn any failure while fetching into UpdateFailed, keeping the cause."""
+    try:
+        yield
+    except ValueError as err:
+        raise UpdateFailed(f"Data validation error: {err}") from err
+    except (TimeoutError, aiohttp.ClientError) as err:
+        raise UpdateFailed(f"Error fetching MetService data: {err}") from err
+    except Exception as err:
+        raise UpdateFailed(f"Unexpected error: {err}") from err
+
+
+def _app_module_lines(result: dict, module_id: str) -> list[dict]:
+    """Return the lines of the first section of an app generic module."""
+    for module in result.get("genericModules") or []:
+        if isinstance(module, dict) and module.get("id") == module_id:
+            sections = module.get("sections") or [{}]
+            return [
+                line
+                for paragraph in sections[0].get("paragraphs") or []
+                for line in paragraph.get("lines") or []
+                if isinstance(line, dict)
+            ]
+    return []
+
+
+def _app_pollen(result: dict) -> dict:
+    """Pollen groups from the app's allergens module: a coloured level, then plants."""
+    groups: list[dict[str, str | None]] = []
+    for line in _app_module_lines(result, "allergens"):
+        text = (line.get("markdown") or "").strip()
+        if colour := line.get("colour"):
+            groups.append(
+                {
+                    "level": text,
+                    "type": None,
+                    "status_class": _APP_POLLEN_CLASSES.get(colour, colour.lower()),
+                }
+            )
+        elif groups and groups[-1]["type"] is None:
+            groups[-1]["type"] = text
+    return {
+        "pollenLevels": groups[0] if groups else {"level": None, "type": None},
+        "groups": groups,
+    }
+
+
+def _app_warnings_area(result: dict) -> str:
+    """Return the warnings-service area ("urban/waitakere") for an app result."""
+    local_url = (result.get("warnings") or {}).get("localWarningsUrl")
+    if not isinstance(local_url, str) or not local_url.strip("/"):
+        raise ValueError("No warnings area in MetService data.")
+    parts = urlsplit(local_url)
+    area_type = parse_qs(parts.query).get("type", ["urban"])[0]
+    return f"{area_type}/{parts.path.rstrip('/').rsplit('/', 1)[-1]}"
 
 
 @dataclass
@@ -114,6 +188,11 @@ class WeatherUpdateCoordinator(DataUpdateCoordinator[MetServicePublicData]):
         return self._location_name
 
     @property
+    def follows_ha_location(self) -> bool:
+        """Return whether data follows Home Assistant's location via the app API."""
+        return self._location == HA_LOCATION
+
+    @property
     def enable_tides(self) -> bool:
         """Return whether tides data is configured."""
         return bool(self._tide_url)
@@ -155,7 +234,11 @@ class WeatherUpdateCoordinator(DataUpdateCoordinator[MetServicePublicData]):
     async def _async_update_data(self) -> MetServicePublicData:
         """Fetch data from API, riding out a transient network failure."""
         try:
-            data = await self.get_public_weather()
+            data = await (
+                self.get_app_weather()
+                if self.follows_ha_location
+                else self.get_public_weather()
+            )
         except UpdateFailed as err:
             if self._can_keep_last_data(err):
                 return self._keep_last_data(err)
@@ -203,7 +286,7 @@ class WeatherUpdateCoordinator(DataUpdateCoordinator[MetServicePublicData]):
     async def get_public_weather(self):
         """Get weather data from public API."""
         headers = self._PUBLIC_HEADERS
-        try:
+        with _raise_update_failed():
             async with asyncio.timeout(10):
                 url = f"{self._api_url}{self.location}"
                 _LOGGER.debug("Fetching MetService public data from %s", url)
@@ -213,26 +296,12 @@ class WeatherUpdateCoordinator(DataUpdateCoordinator[MetServicePublicData]):
                     raise ValueError("No current weather data received.")
                 self._check_errors(url, result_current)
             await self.expand_data_urls(result_current)
-            async with asyncio.timeout(10):
-                url = f"{self._warnings_url}/{result_current['location']['type']}/{result_current['location']['key']}"
-                response = await self._session.get(url, headers=headers)
-                result_warnings = await response.json(content_type=None)
-                if result_warnings is None:
-                    raise ValueError("No warnings data received.")
-                self._check_errors(url, result_warnings)
-            await self.expand_data_urls(result_warnings)
-            structured = [
-                {
-                    "name": warning.get("name") or "Warning",
-                    "text": warning.get("text") or "",
-                    "threat_period": warning.get("threatPeriod") or "",
-                }
-                for warning in result_warnings.get("warnings", [])
-            ]
-            warnings_list = [
-                f"{w['name']}, {w['text']}, {w['threat_period']}" for w in structured
-            ]
-            warnings_text = "\n".join(warnings_list) if warnings_list else "No warnings"
+            location = result_current["location"]
+            result_current.update(
+                await self._async_fetch_warnings(
+                    f"{location['type']}/{location['key']}"
+                )
+            )
             async with asyncio.timeout(10):
                 url = f"{self._api_url}{self.location}/7-days"
                 response = await self._session.get(url, headers=headers)
@@ -241,52 +310,118 @@ class WeatherUpdateCoordinator(DataUpdateCoordinator[MetServicePublicData]):
                     raise ValueError("No daily forecast data received.")
                 self._check_errors(url, result_daily)
             await self.expand_data_urls(result_daily)
-            result_current["weather_warnings"] = warnings_text
-            result_current["warnings_list"] = structured
             result_current["pollen"] = await self.get_pollen_data()
             try:
                 drying_states = self.get_from_dict(
                     result_current, ["dryingIndex", "dryingState"]
                 )
                 if isinstance(drying_states, list):
-                    drying_morning = None
-                    drying_afternoon = None
-                    drying_next_good_day = None
-                    for entry in drying_states:
-                        text = entry.get("text", "") if isinstance(entry, dict) else ""
-                        if text.startswith("Morning:"):
-                            drying_morning = text.removeprefix("Morning:").strip()
-                        elif text.startswith("Afternoon:"):
-                            drying_afternoon = text.removeprefix("Afternoon:").strip()
-                        elif text.lower().startswith("next good day"):
-                            drying_next_good_day = (
-                                text.split(":", 1)[-1].strip() if ":" in text else text
-                            )
-                        elif text:
-                            drying_morning = text
-                    if drying_afternoon is None and drying_morning is not None:
-                        drying_afternoon = drying_morning
-                    if drying_next_good_day is None:
-                        drying_next_good_day = "Today"
-                    result_current["drying_morning"] = drying_morning
-                    result_current["drying_afternoon"] = drying_afternoon
-                    result_current["drying_next_good_day"] = drying_next_good_day
+                    result_current.update(
+                        self._drying_fields(
+                            entry.get("text", "") if isinstance(entry, dict) else ""
+                            for entry in drying_states
+                        )
+                    )
             except Exception as _e:
                 _LOGGER.debug("Could not extract drying index states: %s", _e)
-            if self._tide_url:
-                result_current["tideImport"] = await self.get_tides()
-            if self._boating_url:
-                result_current["boating_data"] = await self.get_boating_data()
-            if self._surf_url:
-                result_current["surf_data"] = await self.get_surf_data()
+            result_current.update(await self._async_fetch_marine())
             return normalize_public_data(result_current, result_daily)
 
-        except ValueError as err:
-            raise UpdateFailed(f"Data validation error: {err}") from err
-        except (TimeoutError, aiohttp.ClientError) as err:
-            raise UpdateFailed(f"Error fetching MetService data: {err}") from err
-        except Exception as err:
-            raise UpdateFailed(f"Unexpected error: {err}") from err
+    async def get_app_weather(self) -> MetServicePublicData:
+        """Get weather data for Home Assistant's current location from the app API."""
+        # The app rounds to 3 decimal places (about 100 m) too.
+        lat = round(self.hass.config.latitude, 3)
+        lng = round(self.hass.config.longitude, 3)
+        with _raise_update_failed():
+            async with asyncio.timeout(10):
+                url = f"{APP_API_URL}/weatherData/{lat}/{lng}"
+                _LOGGER.debug("Fetching MetService app data from %s", url)
+                response = await self._session.get(url, headers=APP_API_HEADERS)
+                if response.status == HTTPStatus.NOT_FOUND:
+                    raise ValueError(
+                        f"MetService has no forecast for {lat}, {lng}; "
+                        "is Home Assistant's location in New Zealand?"
+                    )
+                response.raise_for_status()
+                payload = await response.json(content_type=None)
+            result = payload.get("result") if isinstance(payload, dict) else None
+            if not result:
+                raise ValueError("No weather data received.")
+            extras = await self._async_fetch_warnings(_app_warnings_area(result))
+            extras["pollen"] = _app_pollen(result)
+            laundry = _app_module_lines(result, "laundry")
+            if laundry:
+                extras.update(
+                    self._drying_fields(line.get("markdown") or "" for line in laundry)
+                )
+            extras.update(await self._async_fetch_marine())
+            return normalize_app_data(result, extras)
+
+    async def _async_fetch_warnings(self, area: str) -> dict[str, Any]:
+        """Fetch the warnings for a warnings-service area ("urban/napier")."""
+        async with asyncio.timeout(10):
+            url = f"{self._warnings_url}/{area}"
+            response = await self._session.get(url, headers=self._PUBLIC_HEADERS)
+            result_warnings = await response.json(content_type=None)
+            if result_warnings is None:
+                raise ValueError("No warnings data received.")
+            self._check_errors(url, result_warnings)
+        await self.expand_data_urls(result_warnings)
+        structured = [
+            {
+                "name": warning.get("name") or "Warning",
+                "text": warning.get("text") or "",
+                "threat_period": warning.get("threatPeriod") or "",
+            }
+            for warning in result_warnings.get("warnings", [])
+        ]
+        warnings_list = [
+            f"{w['name']}, {w['text']}, {w['threat_period']}" for w in structured
+        ]
+        return {
+            "weather_warnings": (
+                "\n".join(warnings_list) if warnings_list else "No warnings"
+            ),
+            "warnings_list": structured,
+        }
+
+    @staticmethod
+    def _drying_fields(texts: Iterable[str]) -> dict[str, str | None]:
+        """Parse MetService's clothes-drying lines ("Morning: 1 - 3 hrs")."""
+        drying_morning = None
+        drying_afternoon = None
+        drying_next_good_day = None
+        for text in texts:
+            if text.startswith("Morning:"):
+                drying_morning = text.removeprefix("Morning:").strip()
+            elif text.startswith("Afternoon:"):
+                drying_afternoon = text.removeprefix("Afternoon:").strip()
+            elif text.lower().startswith("next good day"):
+                drying_next_good_day = (
+                    text.split(":", 1)[-1].strip() if ":" in text else text
+                )
+            elif text:
+                drying_morning = text
+        if drying_afternoon is None and drying_morning is not None:
+            drying_afternoon = drying_morning
+        if drying_next_good_day is None:
+            drying_next_good_day = "Today"
+        return {
+            "drying_morning": drying_morning,
+            "drying_afternoon": drying_afternoon,
+            "drying_next_good_day": drying_next_good_day,
+        }
+
+    async def _async_fetch_marine(self) -> dict[str, Any]:
+        """Fetch whichever of tides, boating and surf are configured."""
+        marine: dict[str, Any] = {}
+        if self._tide_url:
+            marine["tideImport"] = await self.get_tides()
+        if self._boating_url:
+            marine["boating_data"] = await self.get_boating_data()
+        if self._surf_url:
+            marine["surf_data"] = await self.get_surf_data()
+        return marine
 
     async def get_tides(self):
         """Get tides data. Returns None if unavailable rather than raising."""

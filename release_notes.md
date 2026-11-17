@@ -1,3 +1,11 @@
+## Unreleased
+
+### Added
+
+- **Follow Home Assistant's location.** A new first choice in the Weather location list fetches the forecast for wherever Home Assistant's location is set, using the MetService app's API, and follows it as it changes, for example from GPS in a campervan. The device is named after the Device name you give it. The UV index level isn't available this way (see [Following Home Assistant's location](https://github.com/nagelm/metservice-weather#-following-home-assistants-location)).
+
+---
+
 ## v2026.11.1
 
 ### Fixed

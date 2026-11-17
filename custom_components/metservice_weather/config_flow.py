@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 import asyncio
+from http import HTTPStatus
 import logging
 import voluptuous as vol
 from homeassistant import config_entries
@@ -14,9 +15,12 @@ from homeassistant.helpers.selector import (
 )
 
 from .const import (
+    APP_API_HEADERS,
+    APP_API_URL,
     DOMAIN,
     DEFAULT_LOCATION,
     CONF_AUTO_HIDE_SEASONAL,
+    HA_LOCATION,
     LOCATION_PATH_RE,
     LOCATIONS_INDEX_URL,
     MARINE_INDEX_URL,
@@ -37,6 +41,11 @@ _LEGACY_TIDE_REGION_URL = "tide_region_url"
 _LEGACY_BOATING_REGION = "boating_region"
 
 _SKIP = "skip"
+
+_HA_LOCATION_OPTION = {
+    "value": HA_LOCATION,
+    "label": "Follow Home Assistant's location",
+}
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -62,6 +71,28 @@ async def _async_location_exists(session, location: str) -> bool | None:
                 return response.status == 200
     except Exception:
         _LOGGER.exception("Failed to check MetService location %s", location)
+        return None
+
+
+async def _async_app_forecast_exists(
+    session, latitude: float, longitude: float
+) -> bool | None:
+    """Return whether the app API forecasts for a point, or None if unreachable."""
+    url = f"{APP_API_URL}/weatherData/{round(latitude, 3)}/{round(longitude, 3)}"
+    try:
+        async with asyncio.timeout(10):
+            response = await session.get(url, headers=APP_API_HEADERS)
+            async with response:
+                if response.status == HTTPStatus.NOT_FOUND:
+                    return False
+                if response.status == HTTPStatus.OK:
+                    return True
+                _LOGGER.error(
+                    "MetService returned HTTP %s for %s", response.status, url
+                )
+                return None
+    except Exception:
+        _LOGGER.exception("Failed to check MetService app forecast at %s", url)
         return None
 
 
@@ -119,6 +150,7 @@ class WeatherFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             self.regions = marine[0].get("items", []) if marine else []
             if not self.locations:
                 return self.async_abort(reason="cannot_connect")
+            self.locations = [_HA_LOCATION_OPTION, *self.locations]
 
             return self.async_show_form(
                 step_id="setup",
@@ -137,6 +169,16 @@ class WeatherFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         error = None
         if not location:
             error = "invalid_location"
+        elif location == HA_LOCATION:
+            covered = await _async_app_forecast_exists(
+                async_get_clientsession(self.hass),
+                self.hass.config.latitude,
+                self.hass.config.longitude,
+            )
+            if covered is None:
+                error = "cannot_connect"
+            elif not covered:
+                error = "ha_location_not_covered"
         elif use_custom and location not in {o["value"] for o in self.locations}:
             exists = await _async_location_exists(
                 async_get_clientsession(self.hass), location
@@ -153,7 +195,7 @@ class WeatherFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             )
         self.user_info[CONF_LOCATION] = location
         self.user_info[CONF_NAME] = user_input[CONF_NAME]
-        self.user_info[CONF_API] = "public"
+        self.user_info[CONF_API] = "app" if location == HA_LOCATION else "public"
         self.user_info[CONF_AUTO_HIDE_SEASONAL] = advanced_options.get(
             CONF_AUTO_HIDE_SEASONAL, False
         )

@@ -11,7 +11,8 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import DOMAIN, MANUFACTURER
 from .coordinator import WeatherUpdateCoordinator
 
-_MODEL = "MetService Public API"
+_PUBLIC_MODEL = "MetService Public API"
+_APP_MODEL = "MetService App API"
 _CONFIGURATION_URL = "https://www.metservice.com"
 
 _MARINE_REGION_NAMES: dict[str, str] = {
@@ -51,8 +52,19 @@ def _marine_device_name(region_slug: str, location_name: str) -> str:
     return label if label else f"{location_name} Marine"
 
 
+def _model(coordinator: WeatherUpdateCoordinator) -> str:
+    """Name the MetService API the device's data comes from."""
+    return _APP_MODEL if coordinator.follows_ha_location else _PUBLIC_MODEL
+
+
 def _location_device_name(coordinator: WeatherUpdateCoordinator) -> str:
-    """Verbatim MetService location label for the town/rural device."""
+    """Verbatim MetService location label for the town/rural device.
+
+    A device that follows Home Assistant's location keeps the configured name
+    rather than taking whichever place it happened to be set up in.
+    """
+    if coordinator.follows_ha_location:
+        return coordinator.location_name
     data = coordinator.data
     if data is not None and getattr(data, "location_name", None):
         return data.location_name
@@ -71,7 +83,7 @@ def async_register_location_device(
         identifiers={(DOMAIN, coordinator.location)},
         name=_location_device_name(coordinator),
         manufacturer=MANUFACTURER,
-        model=_MODEL,
+        model=_model(coordinator),
         configuration_url=_CONFIGURATION_URL,
     )
     return device.id
@@ -95,7 +107,7 @@ class MetServiceEntity(CoordinatorEntity[WeatherUpdateCoordinator]):
                     coordinator.marine_region_slug, location_label
                 ),
                 manufacturer=MANUFACTURER,
-                model=_MODEL,
+                model=_model(coordinator),
                 configuration_url=_CONFIGURATION_URL,
             )
             if coordinator.location_device_id is not None:
@@ -106,6 +118,6 @@ class MetServiceEntity(CoordinatorEntity[WeatherUpdateCoordinator]):
                 identifiers={(DOMAIN, coordinator.location)},
                 name=location_label,
                 manufacturer=MANUFACTURER,
-                model=_MODEL,
+                model=_model(coordinator),
                 configuration_url=_CONFIGURATION_URL,
             )

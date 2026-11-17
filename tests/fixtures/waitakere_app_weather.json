@@ -1,0 +1,3041 @@
+{
+  "_usage": "This data is restricted and may only be used with explicit permission from MetService NZ. Contact dataenquiries@metservice.com",
+  "actualData": [
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T01:00:00+13:00",
+      "gustSpeed": "22",
+      "offset": 1,
+      "rainFall": "0.0",
+      "temperature": "16.4",
+      "timeFrom": "01:00",
+      "timeISO": "2026-11-17T01:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "11"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T02:00:00+13:00",
+      "gustSpeed": "19",
+      "offset": 2,
+      "rainFall": "0.0",
+      "temperature": "16.5",
+      "timeFrom": "02:00",
+      "timeISO": "2026-11-17T02:00:00+13:00",
+      "windDir": "W",
+      "windSpeed": "11"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T03:00:00+13:00",
+      "gustSpeed": "15",
+      "offset": 3,
+      "rainFall": "0.0",
+      "temperature": "15.8",
+      "timeFrom": "03:00",
+      "timeISO": "2026-11-17T03:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "7"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T04:00:00+13:00",
+      "gustSpeed": "11",
+      "offset": 4,
+      "rainFall": "0.0",
+      "temperature": "15.5",
+      "timeFrom": "04:00",
+      "timeISO": "2026-11-17T04:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "6"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T05:00:00+13:00",
+      "gustSpeed": "9",
+      "offset": 5,
+      "rainFall": "0.0",
+      "temperature": "16.5",
+      "timeFrom": "05:00",
+      "timeISO": "2026-11-17T05:00:00+13:00",
+      "windDir": "N",
+      "windSpeed": "6"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T06:00:00+13:00",
+      "gustSpeed": "13",
+      "offset": 6,
+      "rainFall": "0.0",
+      "temperature": "17.2",
+      "timeFrom": "06:00",
+      "timeISO": "2026-11-17T06:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "9"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T07:00:00+13:00",
+      "gustSpeed": "13",
+      "offset": 7,
+      "rainFall": "0.0",
+      "temperature": "17.2",
+      "timeFrom": "07:00",
+      "timeISO": "2026-11-17T07:00:00+13:00",
+      "windDir": "W",
+      "windSpeed": "7"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T08:00:00+13:00",
+      "gustSpeed": "19",
+      "offset": 8,
+      "rainFall": "0.0",
+      "temperature": "18.4",
+      "timeFrom": "08:00",
+      "timeISO": "2026-11-17T08:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "13"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T09:00:00+13:00",
+      "gustSpeed": "31",
+      "offset": 9,
+      "rainFall": "0.0",
+      "temperature": "20.2",
+      "timeFrom": "09:00",
+      "timeISO": "2026-11-17T09:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "15"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T10:00:00+13:00",
+      "gustSpeed": "26",
+      "offset": 10,
+      "rainFall": "0.0",
+      "temperature": "20.8",
+      "timeFrom": "10:00",
+      "timeISO": "2026-11-17T10:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "15"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T11:00:00+13:00",
+      "gustSpeed": "30",
+      "offset": 11,
+      "rainFall": "0.0",
+      "temperature": "22.7",
+      "timeFrom": "11:00",
+      "timeISO": "2026-11-17T11:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "19"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T12:00:00+13:00",
+      "gustSpeed": "39",
+      "offset": 12,
+      "rainFall": "0.0",
+      "temperature": "21.5",
+      "timeFrom": "12:00",
+      "timeISO": "2026-11-17T12:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "17"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T13:00:00+13:00",
+      "gustSpeed": "31",
+      "offset": 13,
+      "rainFall": "0.0",
+      "temperature": "21.9",
+      "timeFrom": "13:00",
+      "timeISO": "2026-11-17T13:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "17"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T14:00:00+13:00",
+      "gustSpeed": "41",
+      "offset": 14,
+      "rainFall": "0.0",
+      "temperature": "21.4",
+      "timeFrom": "14:00",
+      "timeISO": "2026-11-17T14:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "24"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T15:00:00+13:00",
+      "gustSpeed": "33",
+      "offset": 15,
+      "rainFall": "0.2",
+      "temperature": "21.4",
+      "timeFrom": "15:00",
+      "timeISO": "2026-11-17T15:00:00+13:00",
+      "windDir": "N",
+      "windSpeed": "9"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T16:00:00+13:00",
+      "gustSpeed": "52",
+      "offset": 16,
+      "rainFall": "0.0",
+      "temperature": "22.6",
+      "timeFrom": "16:00",
+      "timeISO": "2026-11-17T16:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "30"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T17:00:00+13:00",
+      "gustSpeed": "50",
+      "offset": 17,
+      "rainFall": "0.0",
+      "temperature": "21.3",
+      "timeFrom": "17:00",
+      "timeISO": "2026-11-17T17:00:00+13:00",
+      "windDir": "W",
+      "windSpeed": "33"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T18:00:00+13:00",
+      "gustSpeed": "56",
+      "offset": 18,
+      "rainFall": "0.0",
+      "temperature": "20.6",
+      "timeFrom": "18:00",
+      "timeISO": "2026-11-17T18:00:00+13:00",
+      "windDir": "W",
+      "windSpeed": "19"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T19:00:00+13:00",
+      "gustSpeed": "41",
+      "offset": 19,
+      "rainFall": "0.0",
+      "temperature": "19.8",
+      "timeFrom": "19:00",
+      "timeISO": "2026-11-17T19:00:00+13:00",
+      "windDir": "NW",
+      "windSpeed": "24"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T20:00:00+13:00",
+      "gustSpeed": "41",
+      "offset": 20,
+      "rainFall": "0.0",
+      "temperature": "18.8",
+      "timeFrom": "20:00",
+      "timeISO": "2026-11-17T20:00:00+13:00",
+      "windDir": "W",
+      "windSpeed": "26"
+    },
+    {
+      "date": "Tue 17 Nov 2026",
+      "dateISO": "2026-11-17T21:00:00+13:00",
+      "gustSpeed": "41",
+      "offset": 21,
+      "rainFall": "0.7",
+      "temperature": "18.0",
+      "timeFrom": "21:00",
+      "timeISO": "2026-11-17T21:00:00+13:00",
+      "windDir": "W",
+      "windSpeed": "20"
+    }
+  ],
+  "apiKey": "waitakere",
+  "expectedSensors": {
+    "hasClothingLayers": true,
+    "hasFeelsLike": true,
+    "hasGustSpeed": false,
+    "hasHumidity": true,
+    "hasPressure": true,
+    "hasRainfall": false,
+    "hasTemperature": true,
+    "hasWindDirection": true,
+    "hasWindSpeed": true,
+    "hasWindproofLayers": true
+  },
+  "forecastData": {
+    "days": [
+      {
+        "date": "17 Nov",
+        "dateISO": "2026-11-17T12:00:00+13:00",
+        "dow": "Tuesday",
+        "dowTLA": "Tue",
+        "forecast": "Scattered rain. Northwesterlies.",
+        "forecastWord": "Drizzle",
+        "issuedAt": "3:54pm 17 Nov",
+        "issuedAtISO": "2026-11-17T15:54:00+13:00",
+        "max": "23",
+        "min": "15",
+        "partDayData": {
+          "afternoon": {
+            "forecastWord": "Few showers",
+            "iconType": "DAY"
+          },
+          "evening": {
+            "forecastWord": "Drizzle",
+            "iconType": "DAY"
+          },
+          "morning": {
+            "forecastWord": "Partly cloudy",
+            "iconType": "DAY"
+          },
+          "overnight": {
+            "forecastWord": "Partly cloudy",
+            "iconType": "NIGHT"
+          }
+        },
+        "source": "IPS",
+        "sourceTemps": "IPS",
+        "uvAttributionAppText": "UV data provided by",
+        "uvAttributionImage": "NIWA",
+        "uvAttributionUrl": "https://www.niwa.co.nz/our-services/online-services/uv-ozone",
+        "uvEndTime": "2:35",
+        "uvEndTimeMeridian": "PM",
+        "uvHasAlert": true,
+        "uvMessage": "Protection Required - Whatever your skin colour",
+        "uvStartTime": "9:45",
+        "uvStartTimeMeridian": "AM",
+        "fireWeather": {
+          "danger": {
+            "dailyObservation": "Moderate",
+            "dailyObservationIndex": 2,
+            "footer": "",
+            "periods": [],
+            "text": "To prevent wildfire, follow safety guidelines at [checkitsalright.nz](https://www.checkitsalright.nz)"
+          },
+          "location": "henderson_auckland",
+          "season": {
+            "short": "Open except Public Conservation Estate",
+            "status": "open",
+            "text": "Other than public conservation land, permits are not required today."
+          }
+        }
+      },
+      {
+        "date": "18 Nov",
+        "dateISO": "2026-11-18T12:00:00+13:00",
+        "dow": "Wednesday",
+        "dowTLA": "Wed",
+        "forecast": "Rain, sometimes heavy with possible thunderstorms. Turning to isolated showers in the evening. Northwesterlies, turning southwesterly in the afternoon.",
+        "forecastWord": "Showers",
+        "issuedAt": "1:02pm 17 Nov",
+        "issuedAtISO": "2026-11-17T13:02:00+13:00",
+        "max": "20",
+        "min": "12",
+        "partDayData": {
+          "afternoon": {
+            "forecastWord": "Rain",
+            "iconType": "DAY"
+          },
+          "evening": {
+            "forecastWord": "Few showers",
+            "iconType": "DAY"
+          },
+          "morning": {
+            "forecastWord": "Rain",
+            "iconType": "DAY"
+          },
+          "overnight": {
+            "forecastWord": "Rain",
+            "iconType": "NIGHT"
+          }
+        },
+        "source": "IPS",
+        "sourceTemps": "IPS",
+        "uvHasAlert": false,
+        "fireWeather": {
+          "danger": {
+            "footer": "",
+            "forecast": "Low",
+            "forecastIndex": 1,
+            "periods": [],
+            "text": "The risk of wildfire should be manageable. Check again on the day."
+          },
+          "location": "henderson_auckland",
+          "season": {
+            "short": "Open except Public Conservation Estate",
+            "status": "open",
+            "text": "Before you light, check if you need a permit at [checkitsalright.nz](https://www.checkitsalright.nz)"
+          }
+        }
+      },
+      {
+        "date": "19 Nov",
+        "dateISO": "2026-11-19T12:00:00+13:00",
+        "dow": "Thursday",
+        "dowTLA": "Thu",
+        "forecast": "Mainly fine, chance of a shower in the morning and afternoon. Southwesterlies.",
+        "forecastWord": "Partly cloudy",
+        "issuedAt": "10:34am 17 Nov",
+        "issuedAtISO": "2026-11-17T10:34:00+13:00",
+        "max": "20",
+        "min": "11",
+        "partDayData": {
+          "afternoon": {
+            "forecastWord": "Partly cloudy",
+            "iconType": "DAY"
+          },
+          "evening": {
+            "forecastWord": "Fine",
+            "iconType": "DAY"
+          },
+          "morning": {
+            "forecastWord": "Partly cloudy",
+            "iconType": "DAY"
+          },
+          "overnight": {
+            "forecastWord": "Fine",
+            "iconType": "NIGHT"
+          }
+        },
+        "source": "IPS",
+        "sourceTemps": "IPS",
+        "uvAttributionAppText": "UV data provided by",
+        "uvAttributionImage": "NIWA",
+        "uvAttributionUrl": "https://www.niwa.co.nz/our-services/online-services/uv-ozone",
+        "uvEndTime": "4:55",
+        "uvEndTimeMeridian": "PM",
+        "uvHasAlert": true,
+        "uvMessage": "Protection Required - Slip, Slop, Slap and Wrap",
+        "uvStartTime": "9:25",
+        "uvStartTimeMeridian": "AM"
+      },
+      {
+        "date": "20 Nov",
+        "dateISO": "2026-11-20T12:00:00+13:00",
+        "dow": "Friday",
+        "dowTLA": "Fri",
+        "forecast": "Fine, but cloudy in the morning. Southwesterlies developing in the morning.",
+        "forecastWord": "Partly cloudy",
+        "issuedAt": "10:31am 17 Nov",
+        "issuedAtISO": "2026-11-17T10:31:00+13:00",
+        "max": "19",
+        "min": "10",
+        "source": "IPS",
+        "sourceTemps": "IPS",
+        "uvHasAlert": false
+      },
+      {
+        "date": "21 Nov",
+        "dateISO": "2026-11-21T12:00:00+13:00",
+        "dow": "Saturday",
+        "dowTLA": "Sat",
+        "forecast": "Partly cloudy. Southwesterlies.",
+        "forecastWord": "Partly cloudy",
+        "issuedAt": "10:31am 17 Nov",
+        "issuedAtISO": "2026-11-17T10:31:00+13:00",
+        "max": "20",
+        "min": "9",
+        "source": "IPS",
+        "sourceTemps": "IPS",
+        "uvHasAlert": false
+      },
+      {
+        "date": "22 Nov",
+        "dateISO": "2026-11-22T12:00:00+13:00",
+        "dow": "Sunday",
+        "dowTLA": "Sun",
+        "forecast": "Mainly fine, chance of a shower. Northeasterlies developing.",
+        "forecastWord": "Partly cloudy",
+        "issuedAt": "9:55am 17 Nov",
+        "issuedAtISO": "2026-11-17T09:55:00+13:00",
+        "max": "21",
+        "min": "9",
+        "source": "IPS",
+        "sourceTemps": "IPS",
+        "uvHasAlert": false
+      },
+      {
+        "date": "23 Nov",
+        "dateISO": "2026-11-23T12:00:00+13:00",
+        "dow": "Monday",
+        "dowTLA": "Mon",
+        "forecast": "Partly cloudy with light winds.",
+        "forecastWord": "Partly cloudy",
+        "issuedAt": "12:35pm 17 Nov",
+        "issuedAtISO": "2026-11-17T12:35:00+13:00",
+        "max": "22",
+        "min": "11",
+        "source": "eWasp Urban",
+        "sourceTemps": "IPS",
+        "uvHasAlert": false
+      },
+      {
+        "date": "24 Nov",
+        "dateISO": "2026-11-24T12:00:00+13:00",
+        "dow": "Tuesday",
+        "dowTLA": "Tue",
+        "forecast": "Partly cloudy with light winds.",
+        "forecastWord": "Partly cloudy",
+        "issuedAt": "12:35pm 17 Nov",
+        "issuedAtISO": "2026-11-17T12:35:00+13:00",
+        "max": "22",
+        "min": "12",
+        "source": "eWasp Urban",
+        "sourceTemps": "IPS",
+        "uvHasAlert": false
+      },
+      {
+        "date": "25 Nov",
+        "dateISO": "2026-11-25T12:00:00+13:00",
+        "dow": "Wednesday",
+        "dowTLA": "Wed",
+        "forecast": "A few showers. Light winds.",
+        "forecastWord": "Few showers",
+        "issuedAt": "12:35pm 17 Nov",
+        "issuedAtISO": "2026-11-17T12:35:00+13:00",
+        "max": "24",
+        "min": "12",
+        "source": "eWasp Urban",
+        "sourceTemps": "IPS",
+        "uvHasAlert": false
+      },
+      {
+        "date": "26 Nov",
+        "dateISO": "2026-11-26T12:00:00+13:00",
+        "dow": "Thursday",
+        "dowTLA": "Thu",
+        "forecast": "A few showers with light winds.",
+        "forecastWord": "Few showers",
+        "issuedAt": "12:35pm 17 Nov",
+        "issuedAtISO": "2026-11-17T12:35:00+13:00",
+        "max": "24",
+        "min": "13",
+        "source": "eWasp Urban",
+        "sourceTemps": "IPS",
+        "uvHasAlert": false
+      }
+    ],
+    "fireWeatherAttribution": {
+      "images": [
+        {
+          "appImage": "NIWA",
+          "image": "/files/images/attribution/niwa-logo.png",
+          "name": "NIWA",
+          "url": "https://fireweather.niwa.co.nz/"
+        },
+        {
+          "appImage": "FENZ",
+          "image": "/files/images/attribution/fenz-logo.png",
+          "name": "FENZ",
+          "url": "https://www.checkitsalright.nz/"
+        }
+      ],
+      "text": "Data provided by"
+    },
+    "fireWeatherInfo": {
+      "danger": {
+        "title": "Fire Danger",
+        "values": [
+          {
+            "index": 5,
+            "short": "Extreme",
+            "text": "Any outbreak of fire is extremely serious! All fires are potentially serious and will easily become uncontrollable, unpredictable and fast moving. These fires are very difficult to fight and may become very dangerous and often last for several days."
+          },
+          {
+            "index": 4,
+            "short": "Very high",
+            "text": "Outbreak of fire is very serious! Fires will start easily and will spread rapidly and burn intensely right after ignition. Small fires can quickly become large fires and show extreme fire behaviour. These fires can be difficult to control and will often become much larger and longer-lasting fires."
+          },
+          {
+            "index": 3,
+            "short": "High",
+            "text": "Outbreak of fire is serious! Fires can start easily and control becomes increasingly more difficult the longer the fire is left."
+          },
+          {
+            "index": 2,
+            "short": "Moderate",
+            "text": "Control of fires is reasonably easy. Fires are not likely to become serious and are often easy to control if attended to quickly."
+          },
+          {
+            "index": 1,
+            "short": "Low",
+            "text": "Wildfires are unlikely. Ignition may take place near large and prolonged heat sources but the resulting fires generally do not spread much. Control of fires is generally easy."
+          }
+        ]
+      },
+      "docDisclaimer": "All fires are restricted on Department of Conservation land. Check if you need a permit at [FENZ](https://www.checkitsalright.nz/)",
+      "season": {
+        "title": "Fire Season",
+        "values": [
+          {
+            "short": "Open",
+            "status": "open",
+            "text": "Fires may be lit in open air, without restriction."
+          },
+          {
+            "short": "Restricted",
+            "status": "restricted",
+            "text": "Lighting a fire is riskier than usual. A fire permit is required for most fire types"
+          },
+          {
+            "short": "Prohibited",
+            "status": "prohibited",
+            "text": "Lighting fires in the open air is not permitted. Existing fire permits are suspended, though fire permits may still be granted in exceptional circumstances."
+          }
+        ]
+      }
+    },
+    "locationGFS": "93098",
+    "locationIPS": "AUCKLAND",
+    "locationWASP": "AUCKLAND CENTRAL",
+    "saturdayForecastWord": "Partly cloudy",
+    "sundayForecastWord": "Partly cloudy"
+  },
+  "forecastName": "Auckland",
+  "generalMessage": {
+    "dateText": null,
+    "endTime": null,
+    "heading": null,
+    "linkUrl": null,
+    "locationTargeting": null,
+    "message": null,
+    "startTime": null
+  },
+  "genericModules": [
+    {
+      "footer": {
+        "image": "",
+        "link": "",
+        "markdown": ""
+      },
+      "id": "laundry",
+      "sections": [
+        {
+          "heading": {
+            "markdown": "**Tuesday** 17 Nov"
+          },
+          "icon": "https://www.metservice.com/files/images/app/generic-modules/laundry-icon.png",
+          "paragraphs": [
+            {
+              "lines": [
+                {
+                  "colour": "GREEN",
+                  "markdown": "Morning: 1 - 3 hrs"
+                },
+                {
+                  "colour": "RED",
+                  "markdown": "Afternoon: Wet"
+                }
+              ]
+            },
+            {
+              "lines": []
+            }
+          ]
+        }
+      ],
+      "separateSections": [
+        {
+          "sections": [
+            {
+              "heading": {
+                "markdown": "**Tuesday** 17 Nov"
+              },
+              "icon": "https://www.metservice.com/files/images/app/generic-modules/laundry-icon.png",
+              "paragraphs": [
+                {
+                  "lines": [
+                    {
+                      "colour": "GREEN",
+                      "markdown": "Morning: 1 - 3 hrs"
+                    },
+                    {
+                      "colour": "RED",
+                      "markdown": "Afternoon: Wet"
+                    }
+                  ]
+                },
+                {
+                  "lines": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "title": "Laundry Drying Time"
+    },
+    {
+      "footer": {
+        "image": "https://www.metservice.com/files/images/sponsorships/maritime_logo.jpg",
+        "link": "https://www.maritimenz.govt.nz/",
+        "markdown": "If in doubt, don't go out "
+      },
+      "id": "marine",
+      "sections": [
+        {
+          "heading": {
+            "markdown": ""
+          },
+          "icon": "",
+          "paragraphs": [
+            {
+              "lines": [
+                {
+                  "markdown": "##### Issued: 3:58pm 17 Nov for Raglan Coastal Area"
+                }
+              ]
+            },
+            {
+              "lines": []
+            },
+            {
+              "lines": [
+                {
+                  "markdown": "Northwest 25 knots. Changing to southwest 15 knots south of Kawhia Harbour by evening. Then becoming variable 10 knots everywhere in the evening.Rough sea easing.Long period southwest swell metres. Northwest swell 2 metres easing.Fair visibility in occasional rain."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "heading": {
+            "markdown": ""
+          },
+          "icon": "",
+          "paragraphs": [
+            {
+              "lines": [
+                {
+                  "link": "https://www.maritimenz.govt.nz/recreational/safety/lifejackets/",
+                  "markdown": "Make sure everyone wears a correctly fitted lifejacket."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "separateSections": [
+        {
+          "sections": [
+            {
+              "heading": {
+                "markdown": ""
+              },
+              "icon": "",
+              "paragraphs": [
+                {
+                  "lines": [
+                    {
+                      "markdown": "##### Issued: 3:58pm 17 Nov for Raglan Coastal Area"
+                    }
+                  ]
+                },
+                {
+                  "lines": []
+                },
+                {
+                  "lines": [
+                    {
+                      "markdown": "Northwest 25 knots. Changing to southwest 15 knots south of Kawhia Harbour by evening. Then becoming variable 10 knots everywhere in the evening.Rough sea easing.Long period southwest swell metres. Northwest swell 2 metres easing.Fair visibility in occasional rain."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "heading": {
+                "markdown": ""
+              },
+              "icon": "",
+              "paragraphs": [
+                {
+                  "lines": [
+                    {
+                      "link": "https://www.maritimenz.govt.nz/recreational/safety/lifejackets/",
+                      "markdown": "Make sure everyone wears a correctly fitted lifejacket."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "title": "MARINE OVERVIEW"
+    },
+    {
+      "footer": {
+        "image": "https://www.metservice.com/files/images/sponsorships/animates-logo-v1.png",
+        "link": "https://www.animates.co.nz/?utm_source=metservice",
+        "markdown": "##### We make happy happen "
+      },
+      "id": "petforecast",
+      "sections": [
+        {
+          "heading": {
+            "markdown": "Outdoor Housing"
+          },
+          "icon": "https://www.metservice.com/files/images/app/generic-modules/pets-alt.png",
+          "paragraphs": [
+            {
+              "lines": [
+                {
+                  "colour": "GREEN",
+                  "markdown": "Low Risk"
+                },
+                {
+                  "markdown": "Stay weather aware. Ensure pets have water & shelter."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "separateSections": [
+        {
+          "sections": [
+            {
+              "heading": {
+                "markdown": "Outdoor Housing"
+              },
+              "icon": "https://www.metservice.com/files/images/app/generic-modules/pets-alt.png",
+              "paragraphs": [
+                {
+                  "lines": [
+                    {
+                      "colour": "GREEN",
+                      "markdown": "Low Risk"
+                    },
+                    {
+                      "markdown": "Stay weather aware. Ensure pets have water & shelter."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "title": "ANIMATES PET FORECAST"
+    },
+    {
+      "footer": {
+        "image": "",
+        "link": "",
+        "markdown": ""
+      },
+      "id": "tradiesIndex",
+      "sections": [
+        {
+          "heading": {
+            "markdown": "**Landscaping**"
+          },
+          "icon": "https://www.metservice.com/files/images/app/generic-modules/landscaping.png",
+          "paragraphs": [
+            {
+              "lines": [
+                {
+                  "colour": "ORANGE",
+                  "markdown": "Ok"
+                },
+                {
+                  "markdown": "Most landscaping activities are a go today, but watch for passing showers."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "heading": {
+            "markdown": "**Concrete**"
+          },
+          "icon": "https://www.metservice.com/files/images/app/generic-modules/concreting.png",
+          "paragraphs": [
+            {
+              "lines": [
+                {
+                  "colour": "ORANGE",
+                  "markdown": "Ok"
+                },
+                {
+                  "markdown": "Some rain in the daytime, be ready to cover concrete if necessary."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "heading": {
+            "markdown": "**Framing**"
+          },
+          "icon": "https://www.metservice.com/files/images/app/generic-modules/framing-v2.png",
+          "paragraphs": [
+            {
+              "lines": [
+                {
+                  "colour": "ORANGE",
+                  "markdown": "Ok"
+                },
+                {
+                  "markdown": "Potential for showers"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "separateSections": [
+        {
+          "sections": [
+            {
+              "heading": {
+                "markdown": "**Landscaping**"
+              },
+              "icon": "https://www.metservice.com/files/images/app/generic-modules/landscaping.png",
+              "paragraphs": [
+                {
+                  "lines": [
+                    {
+                      "colour": "ORANGE",
+                      "markdown": "Ok"
+                    },
+                    {
+                      "markdown": "Most landscaping activities are a go today, but watch for passing showers."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "heading": {
+                "markdown": "**Concrete**"
+              },
+              "icon": "https://www.metservice.com/files/images/app/generic-modules/concreting.png",
+              "paragraphs": [
+                {
+                  "lines": [
+                    {
+                      "colour": "ORANGE",
+                      "markdown": "Ok"
+                    },
+                    {
+                      "markdown": "Some rain in the daytime, be ready to cover concrete if necessary."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "heading": {
+                "markdown": "**Framing**"
+              },
+              "icon": "https://www.metservice.com/files/images/app/generic-modules/framing-v2.png",
+              "paragraphs": [
+                {
+                  "lines": [
+                    {
+                      "colour": "ORANGE",
+                      "markdown": "Ok"
+                    },
+                    {
+                      "markdown": "Potential for showers"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "title": "Tradies Forecast"
+    },
+    {
+      "footer": {
+        "image": "https://www.metservice.com/files/images/allergens/lp_logo_colour.png",
+        "link": "https://www.lifepharmacy.co.nz/blogs/health-hq/about-allergies-1",
+        "markdown": "##### Your Allergy Experts "
+      },
+      "id": "allergens",
+      "sections": [
+        {
+          "heading": {
+            "markdown": "**Tue, 17 Nov**"
+          },
+          "icon": "https://www.metservice.com/files/images/app/generic-modules/pollen-icon.png",
+          "paragraphs": [
+            {
+              "lines": [
+                {
+                  "colour": "RED",
+                  "markdown": "High"
+                },
+                {
+                  "markdown": "Early Grasses, Mid season Grasses"
+                },
+                {
+                  "colour": "ORANGE",
+                  "markdown": "Moderate"
+                },
+                {
+                  "markdown": "Plantain, Birch"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "separateSections": [
+        {
+          "sections": [
+            {
+              "heading": {
+                "markdown": "**Tue, 17 Nov**"
+              },
+              "icon": "https://www.metservice.com/files/images/app/generic-modules/pollen-icon.png",
+              "paragraphs": [
+                {
+                  "lines": [
+                    {
+                      "colour": "RED",
+                      "markdown": "High"
+                    },
+                    {
+                      "markdown": "Early Grasses, Mid season Grasses"
+                    },
+                    {
+                      "colour": "ORANGE",
+                      "markdown": "Moderate"
+                    },
+                    {
+                      "markdown": "Plantain, Birch"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "title": "AIRBORNE ALLERGEN FORECAST"
+    }
+  ],
+  "graphDataIsHourly": true,
+  "hasTrafficCam": true,
+  "hourlyForecastData": {
+    "data": [
+      {
+        "date": "Tue 17 Nov 2026",
+        "dateISO": "2026-11-17T22:00:00+13:00",
+        "gustSpeed": "28",
+        "humidity": "86",
+        "offset": 22,
+        "rainFall": "0.2",
+        "temperature": "18",
+        "timeFrom": "22:00",
+        "windDir": "NW",
+        "windSpeed": "18"
+      },
+      {
+        "date": "Tue 17 Nov 2026",
+        "dateISO": "2026-11-17T23:00:00+13:00",
+        "gustSpeed": "24",
+        "humidity": "86",
+        "offset": 23,
+        "rainFall": "0",
+        "temperature": "18",
+        "timeFrom": "23:00",
+        "windDir": "NW",
+        "windSpeed": "17"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T00:00:00+13:00",
+        "gustSpeed": "22",
+        "humidity": "87",
+        "offset": 24,
+        "rainFall": "0",
+        "temperature": "18",
+        "timeFrom": "00:00",
+        "windDir": "NW",
+        "windSpeed": "14"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T01:00:00+13:00",
+        "gustSpeed": "19",
+        "humidity": "88",
+        "offset": 25,
+        "rainFall": "0",
+        "temperature": "18",
+        "timeFrom": "01:00",
+        "windDir": "NW",
+        "windSpeed": "13"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T02:00:00+13:00",
+        "gustSpeed": "17",
+        "humidity": "88",
+        "offset": 26,
+        "rainFall": "0",
+        "temperature": "18",
+        "timeFrom": "02:00",
+        "windDir": "NW",
+        "windSpeed": "10"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T03:00:00+13:00",
+        "gustSpeed": "17",
+        "humidity": "89",
+        "offset": 27,
+        "rainFall": "0",
+        "temperature": "17",
+        "timeFrom": "03:00",
+        "windDir": "NW",
+        "windSpeed": "9"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T04:00:00+13:00",
+        "gustSpeed": "15",
+        "humidity": "90",
+        "offset": 28,
+        "rainFall": "0",
+        "temperature": "17",
+        "timeFrom": "04:00",
+        "windDir": "NW",
+        "windSpeed": "7"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T05:00:00+13:00",
+        "gustSpeed": "15",
+        "humidity": "90",
+        "offset": 29,
+        "rainFall": "0.6",
+        "temperature": "16",
+        "timeFrom": "05:00",
+        "windDir": "N",
+        "windSpeed": "9"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T06:00:00+13:00",
+        "gustSpeed": "15",
+        "humidity": "91",
+        "offset": 30,
+        "rainFall": "3.5",
+        "temperature": "16",
+        "timeFrom": "06:00",
+        "windDir": "N",
+        "windSpeed": "7"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T07:00:00+13:00",
+        "gustSpeed": "17",
+        "humidity": "92",
+        "offset": 31,
+        "rainFall": "1.5",
+        "temperature": "16",
+        "timeFrom": "07:00",
+        "windDir": "NE",
+        "windSpeed": "9"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T08:00:00+13:00",
+        "gustSpeed": "19",
+        "humidity": "91",
+        "offset": 32,
+        "rainFall": "6.5",
+        "temperature": "17",
+        "timeFrom": "08:00",
+        "windDir": "N",
+        "windSpeed": "9"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T09:00:00+13:00",
+        "gustSpeed": "20",
+        "humidity": "90",
+        "offset": 33,
+        "rainFall": "1.7",
+        "temperature": "18",
+        "timeFrom": "09:00",
+        "windDir": "N",
+        "windSpeed": "11"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T10:00:00+13:00",
+        "gustSpeed": "24",
+        "humidity": "96",
+        "offset": 34,
+        "rainFall": "0.5",
+        "temperature": "18",
+        "timeFrom": "10:00",
+        "windDir": "NW",
+        "windSpeed": "15"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T11:00:00+13:00",
+        "gustSpeed": "28",
+        "humidity": "100",
+        "offset": 35,
+        "rainFall": "0",
+        "temperature": "18",
+        "timeFrom": "11:00",
+        "windDir": "NW",
+        "windSpeed": "17"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T12:00:00+13:00",
+        "gustSpeed": "31",
+        "humidity": "100",
+        "offset": 36,
+        "rainFall": "0",
+        "temperature": "17",
+        "timeFrom": "12:00",
+        "windDir": "W",
+        "windSpeed": "19"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T13:00:00+13:00",
+        "gustSpeed": "33",
+        "humidity": "98",
+        "offset": 37,
+        "rainFall": "2.8",
+        "temperature": "17",
+        "timeFrom": "13:00",
+        "windDir": "SW",
+        "windSpeed": "20"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T14:00:00+13:00",
+        "gustSpeed": "35",
+        "humidity": "91",
+        "offset": 38,
+        "rainFall": "6.1",
+        "temperature": "16",
+        "timeFrom": "14:00",
+        "windDir": "W",
+        "windSpeed": "22"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T15:00:00+13:00",
+        "gustSpeed": "37",
+        "humidity": "84",
+        "offset": 39,
+        "rainFall": "5.1",
+        "temperature": "17",
+        "timeFrom": "15:00",
+        "windDir": "SW",
+        "windSpeed": "22"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T16:00:00+13:00",
+        "gustSpeed": "39",
+        "humidity": "79",
+        "offset": 40,
+        "rainFall": "0.5",
+        "temperature": "16",
+        "timeFrom": "16:00",
+        "windDir": "SW",
+        "windSpeed": "22"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T17:00:00+13:00",
+        "gustSpeed": "39",
+        "humidity": "78",
+        "offset": 41,
+        "rainFall": "0.2",
+        "temperature": "16",
+        "timeFrom": "17:00",
+        "windDir": "SW",
+        "windSpeed": "24"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T18:00:00+13:00",
+        "gustSpeed": "41",
+        "humidity": "78",
+        "offset": 42,
+        "rainFall": "0",
+        "temperature": "16",
+        "timeFrom": "18:00",
+        "windDir": "SW",
+        "windSpeed": "24"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T19:00:00+13:00",
+        "gustSpeed": "41",
+        "humidity": "78",
+        "offset": 43,
+        "rainFall": "0",
+        "temperature": "15",
+        "timeFrom": "19:00",
+        "windDir": "SW",
+        "windSpeed": "22"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T20:00:00+13:00",
+        "gustSpeed": "37",
+        "humidity": "78",
+        "offset": 44,
+        "rainFall": "0",
+        "temperature": "15",
+        "timeFrom": "20:00",
+        "windDir": "SW",
+        "windSpeed": "20"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T21:00:00+13:00",
+        "gustSpeed": "35",
+        "humidity": "77",
+        "offset": 45,
+        "rainFall": "0.9",
+        "temperature": "15",
+        "timeFrom": "21:00",
+        "windDir": "SW",
+        "windSpeed": "19"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T22:00:00+13:00",
+        "gustSpeed": "33",
+        "humidity": "77",
+        "offset": 46,
+        "rainFall": "0",
+        "temperature": "15",
+        "timeFrom": "22:00",
+        "windDir": "SW",
+        "windSpeed": "19"
+      },
+      {
+        "date": "Wed 18 Nov 2026",
+        "dateISO": "2026-11-18T23:00:00+13:00",
+        "gustSpeed": "33",
+        "humidity": "78",
+        "offset": 47,
+        "rainFall": "0",
+        "temperature": "15",
+        "timeFrom": "23:00",
+        "windDir": "SW",
+        "windSpeed": "20"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T00:00:00+13:00",
+        "gustSpeed": "35",
+        "humidity": "79",
+        "offset": 48,
+        "rainFall": "0",
+        "temperature": "15",
+        "timeFrom": "00:00",
+        "windDir": "SW",
+        "windSpeed": "20"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T01:00:00+13:00",
+        "gustSpeed": "35",
+        "humidity": "79",
+        "offset": 49,
+        "rainFall": "0.2",
+        "temperature": "14",
+        "timeFrom": "01:00",
+        "windDir": "SW",
+        "windSpeed": "19"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T02:00:00+13:00",
+        "gustSpeed": "33",
+        "humidity": "76",
+        "offset": 50,
+        "rainFall": "0",
+        "temperature": "14",
+        "timeFrom": "02:00",
+        "windDir": "SW",
+        "windSpeed": "19"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T03:00:00+13:00",
+        "gustSpeed": "33",
+        "humidity": "74",
+        "offset": 51,
+        "rainFall": "0",
+        "temperature": "14",
+        "timeFrom": "03:00",
+        "windDir": "SW",
+        "windSpeed": "19"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T04:00:00+13:00",
+        "gustSpeed": "31",
+        "humidity": "73",
+        "offset": 52,
+        "rainFall": "0",
+        "temperature": "13",
+        "timeFrom": "04:00",
+        "windDir": "SW",
+        "windSpeed": "17"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T05:00:00+13:00",
+        "gustSpeed": "30",
+        "humidity": "73",
+        "offset": 53,
+        "rainFall": "0",
+        "temperature": "13",
+        "timeFrom": "05:00",
+        "windDir": "SW",
+        "windSpeed": "17"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T06:00:00+13:00",
+        "gustSpeed": "30",
+        "humidity": "74",
+        "offset": 54,
+        "rainFall": "0",
+        "temperature": "13",
+        "timeFrom": "06:00",
+        "windDir": "SW",
+        "windSpeed": "15"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T07:00:00+13:00",
+        "gustSpeed": "28",
+        "humidity": "75",
+        "offset": 55,
+        "rainFall": "0",
+        "temperature": "14",
+        "timeFrom": "07:00",
+        "windDir": "SW",
+        "windSpeed": "13"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T08:00:00+13:00",
+        "gustSpeed": "28",
+        "humidity": "73",
+        "offset": 56,
+        "rainFall": "0",
+        "temperature": "15",
+        "timeFrom": "08:00",
+        "windDir": "SW",
+        "windSpeed": "15"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T09:00:00+13:00",
+        "gustSpeed": "31",
+        "humidity": "69",
+        "offset": 57,
+        "rainFall": "0",
+        "temperature": "16",
+        "timeFrom": "09:00",
+        "windDir": "SW",
+        "windSpeed": "17"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T10:00:00+13:00",
+        "gustSpeed": "31",
+        "humidity": "64",
+        "offset": 58,
+        "rainFall": "0",
+        "temperature": "17",
+        "timeFrom": "10:00",
+        "windDir": "SW",
+        "windSpeed": "19"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T11:00:00+13:00",
+        "gustSpeed": "31",
+        "humidity": "61",
+        "offset": 59,
+        "rainFall": "0",
+        "temperature": "18",
+        "timeFrom": "11:00",
+        "windDir": "SW",
+        "windSpeed": "17"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T12:00:00+13:00",
+        "gustSpeed": "31",
+        "humidity": "59",
+        "offset": 60,
+        "rainFall": "0",
+        "temperature": "18",
+        "timeFrom": "12:00",
+        "windDir": "SW",
+        "windSpeed": "17"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T13:00:00+13:00",
+        "gustSpeed": "30",
+        "humidity": "59",
+        "offset": 61,
+        "rainFall": "0",
+        "temperature": "19",
+        "timeFrom": "13:00",
+        "windDir": "S",
+        "windSpeed": "15"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T14:00:00+13:00",
+        "gustSpeed": "30",
+        "humidity": "58",
+        "offset": 62,
+        "rainFall": "0.5",
+        "temperature": "19",
+        "timeFrom": "14:00",
+        "windDir": "SW",
+        "windSpeed": "17"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T15:00:00+13:00",
+        "gustSpeed": "31",
+        "humidity": "59",
+        "offset": 63,
+        "rainFall": "1.0",
+        "temperature": "18",
+        "timeFrom": "15:00",
+        "windDir": "SW",
+        "windSpeed": "19"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T16:00:00+13:00",
+        "gustSpeed": "33",
+        "humidity": "60",
+        "offset": 64,
+        "rainFall": "0.8",
+        "temperature": "18",
+        "timeFrom": "16:00",
+        "windDir": "SW",
+        "windSpeed": "20"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T17:00:00+13:00",
+        "gustSpeed": "33",
+        "humidity": "62",
+        "offset": 65,
+        "rainFall": "0.8",
+        "temperature": "18",
+        "timeFrom": "17:00",
+        "windDir": "SW",
+        "windSpeed": "19"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T18:00:00+13:00",
+        "gustSpeed": "31",
+        "humidity": "64",
+        "offset": 66,
+        "rainFall": "0.9",
+        "temperature": "17",
+        "timeFrom": "18:00",
+        "windDir": "SW",
+        "windSpeed": "19"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T19:00:00+13:00",
+        "gustSpeed": "30",
+        "humidity": "67",
+        "offset": 67,
+        "rainFall": "0",
+        "temperature": "16",
+        "timeFrom": "19:00",
+        "windDir": "SW",
+        "windSpeed": "17"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T20:00:00+13:00",
+        "gustSpeed": "28",
+        "humidity": "71",
+        "offset": 68,
+        "rainFall": "0",
+        "temperature": "15",
+        "timeFrom": "20:00",
+        "windDir": "SW",
+        "windSpeed": "13"
+      },
+      {
+        "date": "Thu 19 Nov 2026",
+        "dateISO": "2026-11-19T21:00:00+13:00",
+        "gustSpeed": "22",
+        "humidity": "75",
+        "offset": 69,
+        "rainFall": "0",
+        "temperature": "14",
+        "timeFrom": "21:00",
+        "windDir": "SW",
+        "windSpeed": "11"
+      }
+    ],
+    "disclaimer": {
+      "briefText": "The hourly forecasts above are automatically generated by MetService's computer weather modelling system.",
+      "fullText": "The hourly model data shown can differ from the written forecast and icons, which are produced by MetService meteorologists and take into account model data along with many other data sources. If they differ significantly, please use the text forecasts. \nForecast data is specifically generated for Whenuapai Automatic Weather Station (93098). Rainfall shown is for the sum up to the hour. Wind speed, wind direction and temperature are the observed or forecast values at the given hour."
+    },
+    "information": {
+      "html": "Hourly data may differ from the written forecast and icons above. Do not rely on this graph alone. If they don't match, use the written forecasts. <a target=\"_blank\" href=\"https://about.metservice.com/warnings-vs-hourly\">Why is this?</a>"
+    },
+    "rainfallTotalsMessage": "1mm total expected today, 1mm so far",
+    "sponsor": {
+      "destinationUrl": "",
+      "enabled": false,
+      "imageUrl": ""
+    },
+    "warningMessage": null
+  },
+  "isNationalWarning": true,
+  "locationName": "Waitakere",
+  "maxMinValuesExpected": true,
+  "moonPhases": [
+    {
+      "date": "18 Nov",
+      "dateISO": "2026-11-18T00:28:17+13:00",
+      "phase": "FIRST"
+    },
+    {
+      "date": "25 Nov",
+      "dateISO": "2026-11-25T04:08:43+13:00",
+      "phase": "FULL"
+    },
+    {
+      "date": "1 Dec",
+      "dateISO": "2026-12-01T19:33:11+13:00",
+      "phase": "LAST"
+    },
+    {
+      "date": "9 Dec",
+      "dateISO": "2026-12-09T14:06:10+13:00",
+      "phase": "NEW"
+    }
+  ],
+  "observationData": {
+    "clothingLayers": "1 to 2",
+    "humidity": "94",
+    "isObservationCurrent": true,
+    "location": "93098",
+    "locationName": "Whenuapai AWS",
+    "pressure": "1015",
+    "pressureTrend": "stable",
+    "rainfall": "0.7",
+    "relativeHumidity": "94",
+    "temperature": "18.0",
+    "time": "9:20pm Tue, 17 Nov",
+    "timeISO": "2026-11-17T21:20:00+13:00",
+    "windChill": "18",
+    "windDescription": "Moderate",
+    "windDirection": "W",
+    "windGustSpeed": "30",
+    "windProofLayers": "0",
+    "windSpeed": "20"
+  },
+  "riseSetData": {
+    "astronomicalFirstLight": "4:19am",
+    "astronomicalFirstLightISO": "2026-11-17T04:19:00+13:00",
+    "astronomicalLastLight": "9:55pm",
+    "astronomicalLastLightISO": "2026-11-17T21:55:00+13:00",
+    "day": "17 November 2026",
+    "dayISO": "2026-11-17T00:00:00+13:00",
+    "firstLight": "5:33am",
+    "firstLightISO": "2026-11-17T05:33:00+13:00",
+    "id": "loc11061",
+    "lastLight": "8:40pm",
+    "lastLightISO": "2026-11-17T20:40:00+13:00",
+    "location": "Whenuapai AWS",
+    "moonRise": "12:14pm",
+    "moonRiseISO": "2026-11-17T12:14:00+13:00",
+    "moonSet": "1:40am",
+    "moonSetISO": "2026-11-17T01:40:00+13:00",
+    "sunRise": "6:02am",
+    "sunRiseHour": 6,
+    "sunRiseISO": "2026-11-17T06:02:00+13:00",
+    "sunSet": "8:11pm",
+    "sunSetHour": 20,
+    "sunSetISO": "2026-11-17T20:11:00+13:00"
+  },
+  "tides": [
+    {
+      "days": [
+        {
+          "day": "2026 Nov 17",
+          "dayISO": "2026-11-17T03:21:00+13:00",
+          "dayOfWeek": "Tue",
+          "tides": [
+            {
+              "height": "",
+              "time": "3:21am",
+              "timeISO": "2026-11-17T03:21:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "9:42am",
+              "timeISO": "2026-11-17T09:42:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "3:50pm",
+              "timeISO": "2026-11-17T15:50:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "10:26pm",
+              "timeISO": "2026-11-17T22:26:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 18",
+          "dayISO": "2026-11-18T04:21:00+13:00",
+          "dayOfWeek": "Wed",
+          "tides": [
+            {
+              "height": "",
+              "time": "4:21am",
+              "timeISO": "2026-11-18T04:21:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "10:42am",
+              "timeISO": "2026-11-18T10:42:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "4:52pm",
+              "timeISO": "2026-11-18T16:52:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "11:30pm",
+              "timeISO": "2026-11-18T23:30:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 19",
+          "dayISO": "2026-11-19T05:28:00+13:00",
+          "dayOfWeek": "Thu",
+          "tides": [
+            {
+              "height": "",
+              "time": "5:28am",
+              "timeISO": "2026-11-19T05:28:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "11:51am",
+              "timeISO": "2026-11-19T11:51:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "5:56pm",
+              "timeISO": "2026-11-19T17:56:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 20",
+          "dayISO": "2026-11-20T06:34:00+13:00",
+          "dayOfWeek": "Fri",
+          "tides": [
+            {
+              "height": "",
+              "time": "12:32am",
+              "timeISO": "2026-11-20T00:32:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "6:34am",
+              "timeISO": "2026-11-20T06:34:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "12:58pm",
+              "timeISO": "2026-11-20T12:58:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "6:57pm",
+              "timeISO": "2026-11-20T18:57:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 21",
+          "dayISO": "2026-11-21T07:37:00+13:00",
+          "dayOfWeek": "Sat",
+          "tides": [
+            {
+              "height": "",
+              "time": "1:32am",
+              "timeISO": "2026-11-21T01:32:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "7:37am",
+              "timeISO": "2026-11-21T07:37:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "1:59pm",
+              "timeISO": "2026-11-21T13:59:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "7:56pm",
+              "timeISO": "2026-11-21T19:56:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 22",
+          "dayISO": "2026-11-22T08:35:00+13:00",
+          "dayOfWeek": "Sun",
+          "tides": [
+            {
+              "height": "",
+              "time": "2:28am",
+              "timeISO": "2026-11-22T02:28:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "8:35am",
+              "timeISO": "2026-11-22T08:35:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "2:56pm",
+              "timeISO": "2026-11-22T14:56:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "8:52pm",
+              "timeISO": "2026-11-22T20:52:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 23",
+          "dayISO": "2026-11-23T09:29:00+13:00",
+          "dayOfWeek": "Mon",
+          "tides": [
+            {
+              "height": "",
+              "time": "3:21am",
+              "timeISO": "2026-11-23T03:21:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "9:29am",
+              "timeISO": "2026-11-23T09:29:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "3:49pm",
+              "timeISO": "2026-11-23T15:49:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "9:45pm",
+              "timeISO": "2026-11-23T21:45:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        }
+      ],
+      "location": "Muriwai Beach"
+    },
+    {
+      "days": [
+        {
+          "day": "2026 Nov 17",
+          "dayISO": "2026-11-17T04:03:00+13:00",
+          "dayOfWeek": "Tue",
+          "tides": [
+            {
+              "height": "2.7",
+              "time": "4:03am",
+              "timeISO": "2026-11-17T04:03:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "10:09am",
+              "timeISO": "2026-11-17T10:09:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.8",
+              "time": "4:30pm",
+              "timeISO": "2026-11-17T16:30:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "10:49pm",
+              "timeISO": "2026-11-17T22:49:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 18",
+          "dayISO": "2026-11-18T05:01:00+13:00",
+          "dayOfWeek": "Wed",
+          "tides": [
+            {
+              "height": "2.6",
+              "time": "5:01am",
+              "timeISO": "2026-11-18T05:01:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "11:08am",
+              "timeISO": "2026-11-18T11:08:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.8",
+              "time": "5:30pm",
+              "timeISO": "2026-11-18T17:30:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "11:50pm",
+              "timeISO": "2026-11-18T23:50:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 19",
+          "dayISO": "2026-11-19T06:05:00+13:00",
+          "dayOfWeek": "Thu",
+          "tides": [
+            {
+              "height": "2.7",
+              "time": "6:05am",
+              "timeISO": "2026-11-19T06:05:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "12:13pm",
+              "timeISO": "2026-11-19T12:13:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.8",
+              "time": "6:34pm",
+              "timeISO": "2026-11-19T18:34:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 20",
+          "dayISO": "2026-11-20T07:11:00+13:00",
+          "dayOfWeek": "Fri",
+          "tides": [
+            {
+              "height": "1.0",
+              "time": "12:53am",
+              "timeISO": "2026-11-20T00:53:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.7",
+              "time": "7:11am",
+              "timeISO": "2026-11-20T07:11:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.0",
+              "time": "1:20pm",
+              "timeISO": "2026-11-20T13:20:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.9",
+              "time": "7:36pm",
+              "timeISO": "2026-11-20T19:36:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 21",
+          "dayISO": "2026-11-21T08:12:00+13:00",
+          "dayOfWeek": "Sat",
+          "tides": [
+            {
+              "height": "0.9",
+              "time": "1:53am",
+              "timeISO": "2026-11-21T01:53:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.9",
+              "time": "8:12am",
+              "timeISO": "2026-11-21T08:12:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.9",
+              "time": "2:21pm",
+              "timeISO": "2026-11-21T14:21:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.0",
+              "time": "8:33pm",
+              "timeISO": "2026-11-21T20:33:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 22",
+          "dayISO": "2026-11-22T09:08:00+13:00",
+          "dayOfWeek": "Sun",
+          "tides": [
+            {
+              "height": "0.7",
+              "time": "2:49am",
+              "timeISO": "2026-11-22T02:49:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.1",
+              "time": "9:08am",
+              "timeISO": "2026-11-22T09:08:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.8",
+              "time": "3:16pm",
+              "timeISO": "2026-11-22T15:16:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.2",
+              "time": "9:27pm",
+              "timeISO": "2026-11-22T21:27:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 23",
+          "dayISO": "2026-11-23T09:59:00+13:00",
+          "dayOfWeek": "Mon",
+          "tides": [
+            {
+              "height": "0.6",
+              "time": "3:41am",
+              "timeISO": "2026-11-23T03:41:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.2",
+              "time": "9:59am",
+              "timeISO": "2026-11-23T09:59:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.6",
+              "time": "4:08pm",
+              "timeISO": "2026-11-23T16:08:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.3",
+              "time": "10:18pm",
+              "timeISO": "2026-11-23T22:18:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        }
+      ],
+      "location": "Pouto Point"
+    },
+    {
+      "days": [
+        {
+          "day": "2026 Nov 17",
+          "dayISO": "2026-11-17T00:56:00+13:00",
+          "dayOfWeek": "Tue",
+          "tides": [
+            {
+              "height": "",
+              "time": "12:56am",
+              "timeISO": "2026-11-17T00:56:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "6:51am",
+              "timeISO": "2026-11-17T06:51:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "1:30pm",
+              "timeISO": "2026-11-17T13:30:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "7:34pm",
+              "timeISO": "2026-11-17T19:34:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 18",
+          "dayISO": "2026-11-18T01:43:00+13:00",
+          "dayOfWeek": "Wed",
+          "tides": [
+            {
+              "height": "",
+              "time": "1:43am",
+              "timeISO": "2026-11-18T01:43:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "7:42am",
+              "timeISO": "2026-11-18T07:42:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "2:20pm",
+              "timeISO": "2026-11-18T14:20:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "8:25pm",
+              "timeISO": "2026-11-18T20:25:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 19",
+          "dayISO": "2026-11-19T02:34:00+13:00",
+          "dayOfWeek": "Thu",
+          "tides": [
+            {
+              "height": "",
+              "time": "2:34am",
+              "timeISO": "2026-11-19T02:34:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "8:39am",
+              "timeISO": "2026-11-19T08:39:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "3:11pm",
+              "timeISO": "2026-11-19T15:11:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "9:18pm",
+              "timeISO": "2026-11-19T21:18:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 20",
+          "dayISO": "2026-11-20T03:30:00+13:00",
+          "dayOfWeek": "Fri",
+          "tides": [
+            {
+              "height": "",
+              "time": "3:30am",
+              "timeISO": "2026-11-20T03:30:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "9:39am",
+              "timeISO": "2026-11-20T09:39:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "4:04pm",
+              "timeISO": "2026-11-20T16:04:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "10:11pm",
+              "timeISO": "2026-11-20T22:11:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 21",
+          "dayISO": "2026-11-21T04:30:00+13:00",
+          "dayOfWeek": "Sat",
+          "tides": [
+            {
+              "height": "",
+              "time": "4:30am",
+              "timeISO": "2026-11-21T04:30:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "10:38am",
+              "timeISO": "2026-11-21T10:38:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "4:56pm",
+              "timeISO": "2026-11-21T16:56:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "11:05pm",
+              "timeISO": "2026-11-21T23:05:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 22",
+          "dayISO": "2026-11-22T05:29:00+13:00",
+          "dayOfWeek": "Sun",
+          "tides": [
+            {
+              "height": "",
+              "time": "5:29am",
+              "timeISO": "2026-11-22T05:29:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "11:33am",
+              "timeISO": "2026-11-22T11:33:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "5:48pm",
+              "timeISO": "2026-11-22T17:48:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "11:58pm",
+              "timeISO": "2026-11-22T23:58:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 23",
+          "dayISO": "2026-11-23T06:24:00+13:00",
+          "dayOfWeek": "Mon",
+          "tides": [
+            {
+              "height": "",
+              "time": "6:24am",
+              "timeISO": "2026-11-23T06:24:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "",
+              "time": "12:25pm",
+              "timeISO": "2026-11-23T12:25:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "",
+              "time": "6:41pm",
+              "timeISO": "2026-11-23T18:41:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        }
+      ],
+      "location": "Maraetai"
+    },
+    {
+      "days": [
+        {
+          "day": "2026 Nov 17",
+          "dayISO": "2026-11-17T01:11:00+13:00",
+          "dayOfWeek": "Tue",
+          "tides": [
+            {
+              "height": "2.7",
+              "time": "1:11am",
+              "timeISO": "2026-11-17T01:11:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.0",
+              "time": "7:06am",
+              "timeISO": "2026-11-17T07:06:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.8",
+              "time": "1:45pm",
+              "timeISO": "2026-11-17T13:45:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "7:49pm",
+              "timeISO": "2026-11-17T19:49:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 18",
+          "dayISO": "2026-11-18T01:58:00+13:00",
+          "dayOfWeek": "Wed",
+          "tides": [
+            {
+              "height": "2.7",
+              "time": "1:58am",
+              "timeISO": "2026-11-18T01:58:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "7:57am",
+              "timeISO": "2026-11-18T07:57:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.8",
+              "time": "2:35pm",
+              "timeISO": "2026-11-18T14:35:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "8:40pm",
+              "timeISO": "2026-11-18T20:40:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 19",
+          "dayISO": "2026-11-19T02:49:00+13:00",
+          "dayOfWeek": "Thu",
+          "tides": [
+            {
+              "height": "2.7",
+              "time": "2:49am",
+              "timeISO": "2026-11-19T02:49:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "8:54am",
+              "timeISO": "2026-11-19T08:54:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.8",
+              "time": "3:26pm",
+              "timeISO": "2026-11-19T15:26:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.0",
+              "time": "9:33pm",
+              "timeISO": "2026-11-19T21:33:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 20",
+          "dayISO": "2026-11-20T03:45:00+13:00",
+          "dayOfWeek": "Fri",
+          "tides": [
+            {
+              "height": "2.7",
+              "time": "3:45am",
+              "timeISO": "2026-11-20T03:45:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "9:54am",
+              "timeISO": "2026-11-20T09:54:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.9",
+              "time": "4:19pm",
+              "timeISO": "2026-11-20T16:19:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.9",
+              "time": "10:26pm",
+              "timeISO": "2026-11-20T22:26:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 21",
+          "dayISO": "2026-11-21T04:45:00+13:00",
+          "dayOfWeek": "Sat",
+          "tides": [
+            {
+              "height": "2.8",
+              "time": "4:45am",
+              "timeISO": "2026-11-21T04:45:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.0",
+              "time": "10:53am",
+              "timeISO": "2026-11-21T10:53:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.9",
+              "time": "5:11pm",
+              "timeISO": "2026-11-21T17:11:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.8",
+              "time": "11:20pm",
+              "timeISO": "2026-11-21T23:20:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 22",
+          "dayISO": "2026-11-22T05:44:00+13:00",
+          "dayOfWeek": "Sun",
+          "tides": [
+            {
+              "height": "2.9",
+              "time": "5:44am",
+              "timeISO": "2026-11-22T05:44:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.9",
+              "time": "11:48am",
+              "timeISO": "2026-11-22T11:48:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.0",
+              "time": "6:03pm",
+              "timeISO": "2026-11-22T18:03:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 23",
+          "dayISO": "2026-11-23T06:39:00+13:00",
+          "dayOfWeek": "Mon",
+          "tides": [
+            {
+              "height": "0.7",
+              "time": "12:13am",
+              "timeISO": "2026-11-23T00:13:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.0",
+              "time": "6:39am",
+              "timeISO": "2026-11-23T06:39:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.8",
+              "time": "12:40pm",
+              "timeISO": "2026-11-23T12:40:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.1",
+              "time": "6:56pm",
+              "timeISO": "2026-11-23T18:56:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        }
+      ],
+      "location": "Auckland"
+    },
+    {
+      "days": [
+        {
+          "day": "2026 Nov 17",
+          "dayISO": "2026-11-17T04:01:00+13:00",
+          "dayOfWeek": "Tue",
+          "tides": [
+            {
+              "height": "3.3",
+              "time": "4:01am",
+              "timeISO": "2026-11-17T04:01:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.5",
+              "time": "10:12am",
+              "timeISO": "2026-11-17T10:12:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.4",
+              "time": "4:30pm",
+              "timeISO": "2026-11-17T16:30:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.5",
+              "time": "10:56pm",
+              "timeISO": "2026-11-17T22:56:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 18",
+          "dayISO": "2026-11-18T05:01:00+13:00",
+          "dayOfWeek": "Wed",
+          "tides": [
+            {
+              "height": "3.2",
+              "time": "5:01am",
+              "timeISO": "2026-11-18T05:01:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.5",
+              "time": "11:12am",
+              "timeISO": "2026-11-18T11:12:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.4",
+              "time": "5:32pm",
+              "timeISO": "2026-11-18T17:32:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 19",
+          "dayISO": "2026-11-19T06:08:00+13:00",
+          "dayOfWeek": "Thu",
+          "tides": [
+            {
+              "height": "1.5",
+              "time": "midnight",
+              "timeISO": "2026-11-19T00:00:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.3",
+              "time": "6:08am",
+              "timeISO": "2026-11-19T06:08:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.5",
+              "time": "12:21pm",
+              "timeISO": "2026-11-19T12:21:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.5",
+              "time": "6:36pm",
+              "timeISO": "2026-11-19T18:36:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 20",
+          "dayISO": "2026-11-20T07:14:00+13:00",
+          "dayOfWeek": "Fri",
+          "tides": [
+            {
+              "height": "1.4",
+              "time": "1:03am",
+              "timeISO": "2026-11-20T01:03:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.4",
+              "time": "7:14am",
+              "timeISO": "2026-11-20T07:14:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.4",
+              "time": "1:28pm",
+              "timeISO": "2026-11-20T13:28:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.6",
+              "time": "7:37pm",
+              "timeISO": "2026-11-20T19:37:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 21",
+          "dayISO": "2026-11-21T08:17:00+13:00",
+          "dayOfWeek": "Sat",
+          "tides": [
+            {
+              "height": "1.2",
+              "time": "2:02am",
+              "timeISO": "2026-11-21T02:02:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.5",
+              "time": "8:17am",
+              "timeISO": "2026-11-21T08:17:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.2",
+              "time": "2:29pm",
+              "timeISO": "2026-11-21T14:29:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.7",
+              "time": "8:36pm",
+              "timeISO": "2026-11-21T20:36:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 22",
+          "dayISO": "2026-11-22T09:15:00+13:00",
+          "dayOfWeek": "Sun",
+          "tides": [
+            {
+              "height": "1.0",
+              "time": "2:58am",
+              "timeISO": "2026-11-22T02:58:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.7",
+              "time": "9:15am",
+              "timeISO": "2026-11-22T09:15:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.0",
+              "time": "3:26pm",
+              "timeISO": "2026-11-22T15:26:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.9",
+              "time": "9:32pm",
+              "timeISO": "2026-11-22T21:32:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 23",
+          "dayISO": "2026-11-23T10:09:00+13:00",
+          "dayOfWeek": "Mon",
+          "tides": [
+            {
+              "height": "0.8",
+              "time": "3:51am",
+              "timeISO": "2026-11-23T03:51:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "4.0",
+              "time": "10:09am",
+              "timeISO": "2026-11-23T10:09:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.8",
+              "time": "4:19pm",
+              "timeISO": "2026-11-23T16:19:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "4.0",
+              "time": "10:25pm",
+              "timeISO": "2026-11-23T22:25:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        }
+      ],
+      "location": "Onehunga"
+    },
+    {
+      "days": [
+        {
+          "day": "2026 Nov 17",
+          "dayISO": "2026-11-17T03:43:00+13:00",
+          "dayOfWeek": "Tue",
+          "tides": [
+            {
+              "height": "2.5",
+              "time": "3:43am",
+              "timeISO": "2026-11-17T03:43:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.0",
+              "time": "9:45am",
+              "timeISO": "2026-11-17T09:45:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.7",
+              "time": "4:11pm",
+              "timeISO": "2026-11-17T16:11:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "10:27pm",
+              "timeISO": "2026-11-17T22:27:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 18",
+          "dayISO": "2026-11-18T04:40:00+13:00",
+          "dayOfWeek": "Wed",
+          "tides": [
+            {
+              "height": "2.5",
+              "time": "4:40am",
+              "timeISO": "2026-11-18T04:40:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "10:43am",
+              "timeISO": "2026-11-18T10:43:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.6",
+              "time": "5:12pm",
+              "timeISO": "2026-11-18T17:12:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "11:28pm",
+              "timeISO": "2026-11-18T23:28:00+13:00",
+              "type": "LOW"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 19",
+          "dayISO": "2026-11-19T05:47:00+13:00",
+          "dayOfWeek": "Thu",
+          "tides": [
+            {
+              "height": "2.5",
+              "time": "5:47am",
+              "timeISO": "2026-11-19T05:47:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.1",
+              "time": "11:50am",
+              "timeISO": "2026-11-19T11:50:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.7",
+              "time": "6:18pm",
+              "timeISO": "2026-11-19T18:18:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 20",
+          "dayISO": "2026-11-20T06:57:00+13:00",
+          "dayOfWeek": "Fri",
+          "tides": [
+            {
+              "height": "1.0",
+              "time": "12:30am",
+              "timeISO": "2026-11-20T00:30:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.6",
+              "time": "6:57am",
+              "timeISO": "2026-11-20T06:57:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "1.0",
+              "time": "12:57pm",
+              "timeISO": "2026-11-20T12:57:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.8",
+              "time": "7:21pm",
+              "timeISO": "2026-11-20T19:21:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 21",
+          "dayISO": "2026-11-21T08:00:00+13:00",
+          "dayOfWeek": "Sat",
+          "tides": [
+            {
+              "height": "0.8",
+              "time": "1:29am",
+              "timeISO": "2026-11-21T01:29:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.8",
+              "time": "8am",
+              "timeISO": "2026-11-21T08:00:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.8",
+              "time": "1:58pm",
+              "timeISO": "2026-11-21T13:58:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.9",
+              "time": "8:17pm",
+              "timeISO": "2026-11-21T20:17:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 22",
+          "dayISO": "2026-11-22T08:55:00+13:00",
+          "dayOfWeek": "Sun",
+          "tides": [
+            {
+              "height": "0.7",
+              "time": "2:24am",
+              "timeISO": "2026-11-22T02:24:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "2.9",
+              "time": "8:55am",
+              "timeISO": "2026-11-22T08:55:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.7",
+              "time": "2:52pm",
+              "timeISO": "2026-11-22T14:52:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.1",
+              "time": "9:10pm",
+              "timeISO": "2026-11-22T21:10:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        },
+        {
+          "day": "2026 Nov 23",
+          "dayISO": "2026-11-23T09:45:00+13:00",
+          "dayOfWeek": "Mon",
+          "tides": [
+            {
+              "height": "0.5",
+              "time": "3:15am",
+              "timeISO": "2026-11-23T03:15:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.1",
+              "time": "9:45am",
+              "timeISO": "2026-11-23T09:45:00+13:00",
+              "type": "HIGH"
+            },
+            {
+              "height": "0.5",
+              "time": "3:42pm",
+              "timeISO": "2026-11-23T15:42:00+13:00",
+              "type": "LOW"
+            },
+            {
+              "height": "3.2",
+              "time": "10pm",
+              "timeISO": "2026-11-23T22:00:00+13:00",
+              "type": "HIGH"
+            }
+          ]
+        }
+      ],
+      "location": "Raglan"
+    }
+  ],
+  "tidesDisclaimer": [
+    "MetOcean Solutions",
+    "Please note that tide times have been corrected for daylight saving time.",
+    "MetService and MetOcean Solutions accept no liability for any direct, indirect, consequential or incidental damages that result from any errors in the tide information, whether due to MetService, MetOcean Solutions or a third party, or that arise from the use, or misuse, of the tide information contained in this website.",
+    "Tide data viewed or downloaded from this web site is not equivalent to or a replacement for the official tide data as specified in Maritime Rules Part 25 Nautical Charts and Publications (pursuant to Section 36 of the Maritime Transport Act 1994)."
+  ],
+  "tsunamiWarning": null,
+  "videoPlayList": {
+    "items": []
+  },
+  "warnings": {
+    "hasLocalWarning": true,
+    "localWarningsUrl": "/mobile/nz/warnings/waitakere",
+    "warnLevel": "yellow",
+    "warningLocationName": "Auckland",
+    "previews": [
+      {
+        "details": {
+          "markdown": "**Forecast:** Periods of heavy rain, with thunderstorms and localised downpours possible. Rainfall amounts may approach warning criteria.\nModerate chance of upgrading to a Warning.\n\n###### Next update: 10:00am Wed 18 Nov"
+        },
+        "markdown": "**Period:** 8hrs from 7am - 3pm Wed, 18 Nov\n\n**Area:** Auckland and Great Barrier Island\n\n###### Issued: 8:53pm Tue 17 Nov\n\n",
+        "name": "Heavy Rain Watch",
+        "shareText": "MetService Heavy Rain Watch\n\nArea: Auckland and Great Barrier Island\n\nPeriod: 8hrs from 7am - 3pm Wed, 18 Nov\n\nForecast: Periods of heavy rain, with thunderstorms and localised downpours possible. Rainfall amounts may approach warning criteria.\nModerate chance of upgrading to a Warning.\n\nIssued: 8:53pm Tue 17 Nov\n\nAll severe weather information:\nhttps://www.metservice.com/warnings\n\nDownload the MetService app.\nhttps://www.metservice.com/app",
+        "warnIcon": "warning-rain-yellow",
+        "warnLevel": "yellow"
+      }
+    ]
+  },
+  "placeName": {
+    "id": 526,
+    "geoAdministrativeStructure": "nzUrban",
+    "partitions": [
+      {
+        "partition": "suburb",
+        "name": "Henderson"
+      },
+      {
+        "partition": "city",
+        "name": "Auckland"
+      },
+      {
+        "partition": "region",
+        "name": "Auckland"
+      }
+    ],
+    "geo": {
+      "latitude": -36.87972,
+      "longitude": 174.62295
+    }
+  }
+}

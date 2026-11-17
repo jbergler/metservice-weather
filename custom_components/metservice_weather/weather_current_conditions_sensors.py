@@ -378,14 +378,20 @@ def _full_text_attr(text: str | None) -> dict[str, StateType]:
     return {}
 
 
+# A location that follows Home Assistant's moves in and out of station and
+# breakdown coverage, so its sensors are kept rather than removed at setup.
 def _has_observations(coordinator: Any) -> bool:
     """Location has a weather station (rural pages have none)."""
-    return coordinator.data is not None and coordinator.data.has_observations
+    return coordinator.follows_ha_location or (
+        coordinator.data is not None and coordinator.data.has_observations
+    )
 
 
 def _has_breakdown(coordinator: Any) -> bool:
     """Location's forecast carries morning/afternoon/evening/overnight conditions."""
-    return coordinator.data is not None and coordinator.data.has_breakdown
+    return coordinator.follows_ha_location or (
+        coordinator.data is not None and coordinator.data.has_breakdown
+    )
 
 
 def _tides_enabled(coordinator: Any) -> bool:

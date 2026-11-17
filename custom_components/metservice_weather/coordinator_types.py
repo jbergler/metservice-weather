@@ -364,6 +364,125 @@ class MetServicePublicData:
     surf_period: str | None = None
 
 
+def _rain_outlook(
+    observed_hourly: list[HourlyEntry],
+    forecast_hourly: list[HourlyEntry],
+    daily_entries: list[DailyEntry],
+    now: datetime,
+) -> dict[str, Any]:
+    """Fill each day's rain total from the hourly series and derive the rain outlook."""
+    hour_mm: dict[Any, float | None] = {}
+    for slice_entries in (forecast_hourly, observed_hourly):
+        for h in slice_entries:
+            if not h.datetime:
+                continue
+            try:
+                parsed = datetime.fromisoformat(h.datetime)
+            except ValueError:
+                continue
+            hour_mm[parsed] = h.rainfall
+
+    rain_sums: dict[Any, float] = {}
+    rain_counts: dict[Any, int] = {}
+    for parsed, rainfall in hour_mm.items():
+        day_key = parsed.date()
+        rain_sums[day_key] = rain_sums.get(day_key, 0.0) + (rainfall or 0)
+        rain_counts[day_key] = rain_counts.get(day_key, 0) + 1
+
+    for entry in daily_entries:
+        if not entry.datetime:
+            continue
+        try:
+            entry_date = datetime.fromisoformat(entry.datetime).date()
+        except ValueError:
+            continue
+        if rain_counts.get(entry_date, 0) >= 20:
+            entry.rain_total_mm = round(rain_sums[entry_date], 1)
+
+    now_floor = now.replace(minute=0, second=0, microsecond=0)
+    future_hourly: list[tuple[datetime, HourlyEntry]] = []
+    for h in forecast_hourly:
+        if not h.datetime:
+            continue
+        try:
+            parsed = datetime.fromisoformat(h.datetime)
+            if parsed < now_floor:
+                continue
+        except ValueError, TypeError:
+            continue
+        future_hourly.append((parsed, h))
+    future_hourly.sort(key=lambda pair: pair[0])
+
+    next_rain_at = next(
+        (
+            h.datetime
+            for _, h in future_hourly
+            if h.rainfall is not None and h.rainfall > 0
+        ),
+        None,
+    )
+    next_rain_precision = "hour" if next_rain_at is not None else None
+
+    if next_rain_at is None:
+        last_hourly = future_hourly[-1][0] if future_hourly else None
+        next_rain_at = _next_rain_from_daily(daily_entries, now, last_hourly)
+        if next_rain_at is not None:
+            next_rain_precision = "day"
+
+    return {
+        "rain_next_8h_mm": (
+            round(sum((h.rainfall or 0) for _, h in future_hourly[:8]), 1)
+            if len(future_hourly) >= 8
+            else None
+        ),
+        "rain_next_24h_mm": (
+            round(sum((h.rainfall or 0) for _, h in future_hourly[:24]), 1)
+            if len(future_hourly) >= 24
+            else None
+        ),
+        "next_rain_at": next_rain_at,
+        "next_rain_precision": next_rain_precision,
+        "rain_forecast_horizon": (
+            (daily_entries[-1].datetime or None) if daily_entries else None
+        ),
+    }
+
+
+def _supplementary_fields(extras: dict) -> dict[str, Any]:
+    """Fields the coordinator fetched or parsed alongside the forecast itself."""
+    boating = extras.get("boating_data") or {}
+    surf = extras.get("surf_data") or {}
+    pollen_groups = _get(extras, "pollen", "groups") or []
+    pollen_state, pollen_active, pollen_imminent = _derive_pollen(pollen_groups)
+    return {
+        "pollen_level": _get(extras, "pollen", "pollenLevels", "level"),
+        "pollen_type": _get(extras, "pollen", "pollenLevels", "type"),
+        "pollen_groups": pollen_groups,
+        "pollen_state": pollen_state,
+        "pollen_active": pollen_active,
+        "pollen_imminent": pollen_imminent,
+        "weather_warnings": extras.get("weather_warnings", "No warnings"),
+        "warnings_list": extras.get("warnings_list") or [],
+        "drying_morning": extras.get("drying_morning"),
+        "drying_afternoon": extras.get("drying_afternoon"),
+        "drying_next_good_day": extras.get("drying_next_good_day"),
+        "tides": extras.get("tideImport"),
+        "boating_forecast": boating.get("boating_forecast"),
+        "boating_status": boating.get("boating_status"),
+        "boating_table": boating.get("boating_table"),
+        "surf_conditions": surf.get("surf_conditions"),
+        "surf_rating": surf.get("surf_rating"),
+        "surf_wave_height": surf.get("surf_wave_height"),
+        "surf_set_face": surf.get("surf_set_face"),
+        "surf_swell_direction": surf.get("surf_swell_direction"),
+        "surf_swell_height": surf.get("surf_swell_height"),
+        "surf_wind_direction": surf.get("surf_wind_direction"),
+        "surf_wind_speed": surf.get("surf_wind_speed"),
+        "surf_wind_gust": surf.get("surf_wind_gust"),
+        "surf_period": surf.get("surf_period"),
+    }
+
+
 def normalize_public_data(
     current: dict, daily: dict, now: datetime | None = None
 ) -> MetServicePublicData:
@@ -494,33 +613,7 @@ def normalize_public_data(
 
     observed_hourly = hourly_entries[:hourly_skip]
     forecast_hourly = hourly_entries[hourly_skip : hourly_skip + hourly_obs_count]
-    hour_mm: dict[Any, float | None] = {}
-    for slice_entries in (forecast_hourly, observed_hourly):
-        for h in slice_entries:
-            if not h.datetime:
-                continue
-            try:
-                parsed = datetime.fromisoformat(h.datetime)
-            except ValueError:
-                continue
-            hour_mm[parsed] = h.rainfall
-
-    rain_sums: dict[Any, float] = {}
-    rain_counts: dict[Any, int] = {}
-    for parsed, rainfall in hour_mm.items():
-        day_key = parsed.date()
-        rain_sums[day_key] = rain_sums.get(day_key, 0.0) + (rainfall or 0)
-        rain_counts[day_key] = rain_counts.get(day_key, 0) + 1
-
-    for entry in daily_entries:
-        if not entry.datetime:
-            continue
-        try:
-            entry_date = datetime.fromisoformat(entry.datetime).date()
-        except ValueError:
-            continue
-        if rain_counts.get(entry_date, 0) >= 20:
-            entry.rain_total_mm = round(rain_sums[entry_date], 1)
+    rain_outlook = _rain_outlook(observed_hourly, forecast_hourly, daily_entries, now)
 
     with contextlib.suppress(Exception):
         notes = graph_module.get("notes") or []
@@ -539,54 +632,7 @@ def normalize_public_data(
                     theirs,
                 )
 
-    now_floor = now.replace(minute=0, second=0, microsecond=0)
-    future_hourly: list[tuple[datetime, HourlyEntry]] = []
-    for h in forecast_hourly:
-        if not h.datetime:
-            continue
-        try:
-            parsed = datetime.fromisoformat(h.datetime)
-            if parsed < now_floor:
-                continue
-        except ValueError, TypeError:
-            continue
-        future_hourly.append((parsed, h))
-    future_hourly.sort(key=lambda pair: pair[0])
-
-    rain_next_8h_mm = (
-        round(sum((h.rainfall or 0) for _, h in future_hourly[:8]), 1)
-        if len(future_hourly) >= 8
-        else None
-    )
-    rain_next_24h_mm = (
-        round(sum((h.rainfall or 0) for _, h in future_hourly[:24]), 1)
-        if len(future_hourly) >= 24
-        else None
-    )
-    next_rain_at = next(
-        (
-            h.datetime
-            for _, h in future_hourly
-            if h.rainfall is not None and h.rainfall > 0
-        ),
-        None,
-    )
-    next_rain_precision = "hour" if next_rain_at is not None else None
-
-    if next_rain_at is None:
-        last_hourly = future_hourly[-1][0] if future_hourly else None
-        next_rain_at = _next_rain_from_daily(daily_entries, now, last_hourly)
-        if next_rain_at is not None:
-            next_rain_precision = "day"
-
-    rain_forecast_horizon = (
-        (daily_entries[-1].datetime or None) if daily_entries else None
-    )
-
     tomorrow = daily_entries[1] if len(daily_entries) > 1 else None
-
-    boating = current.get("boating_data") or {}
-    surf = current.get("surf_data") or {}
 
     temp_today_high = _safe_float(_get(obs, "temperature", "0", "high"))
     if temp_today_high is None:
@@ -596,9 +642,6 @@ def normalize_public_data(
         temp_today_low = _safe_float(_scan_forecasts(day0, "lowTemp"))
 
     is_rural = str(day0.get("isRural", "")).lower() == "true"
-
-    pollen_groups = current.get("pollen", {}).get("groups") or []
-    pollen_state, pollen_active, pollen_imminent = _derive_pollen(pollen_groups)
 
     raw_phase_date = _get(moon_phases, "0", "dateISO")
     moon_phase_date = _round_iso_to_minutes(raw_phase_date)
@@ -659,47 +702,19 @@ def normalize_public_data(
         fire_danger_index=fire_danger_index,
         fire_danger_text=fire_danger_text,
         fire_danger_forecast=fire_danger_forecast,
-        pollen_level=_get(current, "pollen", "pollenLevels", "level"),
-        pollen_type=_get(current, "pollen", "pollenLevels", "type"),
-        pollen_groups=pollen_groups,
-        pollen_state=pollen_state,
-        pollen_active=pollen_active,
-        pollen_imminent=pollen_imminent,
-        weather_warnings=current.get("weather_warnings", "No warnings"),
-        warnings_list=current.get("warnings_list") or [],
+        **_supplementary_fields(current),
         tomorrow_condition=tomorrow.condition if tomorrow else None,
         tomorrow_temp_high=tomorrow.temp_high if tomorrow else None,
         tomorrow_temp_low=tomorrow.temp_low if tomorrow else None,
         tomorrow_description=tomorrow.description if tomorrow else None,
-        drying_morning=current.get("drying_morning"),
-        drying_afternoon=current.get("drying_afternoon"),
-        drying_next_good_day=current.get("drying_next_good_day"),
         has_observations=bool(obs),
         has_breakdown=bool(breakdown0),
         is_rural=is_rural,
         hourly_entries=hourly_entries,
         hourly_obs=hourly_obs_count,
         hourly_skip=hourly_skip,
-        rain_next_8h_mm=rain_next_8h_mm,
-        rain_next_24h_mm=rain_next_24h_mm,
-        next_rain_at=next_rain_at,
-        next_rain_precision=next_rain_precision,
-        rain_forecast_horizon=rain_forecast_horizon,
+        **rain_outlook,
         daily_entries=daily_entries,
-        tides=current.get("tideImport"),
-        boating_forecast=boating.get("boating_forecast"),
-        boating_status=boating.get("boating_status"),
-        boating_table=boating.get("boating_table"),
-        surf_conditions=surf.get("surf_conditions"),
-        surf_rating=surf.get("surf_rating"),
-        surf_wave_height=surf.get("surf_wave_height"),
-        surf_set_face=surf.get("surf_set_face"),
-        surf_swell_direction=surf.get("surf_swell_direction"),
-        surf_swell_height=surf.get("surf_swell_height"),
-        surf_wind_direction=surf.get("surf_wind_direction"),
-        surf_wind_speed=surf.get("surf_wind_speed"),
-        surf_wind_gust=surf.get("surf_wind_gust"),
-        surf_period=surf.get("surf_period"),
     )
     if obs:
         missing = [
@@ -729,3 +744,146 @@ def normalize_public_data(
             [sorted(m) if isinstance(m, dict) else str(type(m)) for m in left_major],
         )
     return data
+
+
+def _app_condition(word: Any) -> str | None:
+    """Turn an app forecast word ("Partly cloudy") into the website's token."""
+    if not isinstance(word, str) or not word.strip():
+        return None
+    return "-".join(word.lower().split())
+
+
+def _app_hourly(rows: Any) -> list[HourlyEntry]:
+    """Build hourly entries from the app's observed or forecast hour rows."""
+    if not isinstance(rows, list):
+        return []
+    return [
+        HourlyEntry(
+            datetime=row["dateISO"],
+            temperature=_safe_float(row.get("temperature")),
+            rainfall=_safe_float(row.get("rainFall")),
+            wind_speed=_safe_float(row.get("windSpeed")),
+            wind_direction=row.get("windDir"),
+        )
+        for row in rows
+        if isinstance(row, dict) and isinstance(row.get("dateISO"), str)
+    ]
+
+
+def _app_uv_time(clock: Any, meridian: Any) -> str | None:
+    """Join the app's split UV window time ("9:45", "AM") into "9:45am"."""
+    if not isinstance(clock, str) or not isinstance(meridian, str):
+        return None
+    return f"{clock}{meridian.lower()}"
+
+
+def normalize_app_data(
+    result: dict, extras: dict, now: datetime | None = None
+) -> MetServicePublicData:
+    """Build a MetServicePublicData from the app API's weatherData result."""
+    now = now or dt_util.now()
+
+    obs = result.get("observationData") or {}
+    if obs.get("isObservationCurrent") is False:
+        obs = {}
+    days = [
+        d for d in _get(result, "forecastData", "days") or [] if isinstance(d, dict)
+    ]
+    day0 = days[0] if days else {}
+    day1 = days[1] if len(days) > 1 else {}
+    part_day = day0.get("partDayData") or {}
+    fire = day0.get("fireWeather") or {}
+    rise_set = result.get("riseSetData") or {}
+    moon_phases = result.get("moonPhases") or []
+
+    try:
+        day_reference = datetime.fromisoformat(day0["dateISO"])
+    except KeyError, TypeError, ValueError:
+        day_reference = None
+
+    uv_window_start_raw = _app_uv_time(
+        day0.get("uvStartTime"), day0.get("uvStartTimeMeridian")
+    )
+    uv_window_end_raw = _app_uv_time(
+        day0.get("uvEndTime"), day0.get("uvEndTimeMeridian")
+    )
+    fire_season_status = _get(fire, "season", "status")
+
+    observed_hourly = _app_hourly(result.get("actualData"))
+    forecast_hourly = _app_hourly(_get(result, "hourlyForecastData", "data"))
+    daily_entries = [
+        DailyEntry(
+            datetime=d.get("dateISO"),
+            condition=_app_condition(d.get("forecastWord")),
+            temp_high=_safe_float(d.get("max")),
+            temp_low=_safe_float(d.get("min")),
+            description=d.get("forecast"),
+        )
+        for d in days
+    ]
+    rain_outlook = _rain_outlook(observed_hourly, forecast_hourly, daily_entries, now)
+    tomorrow = daily_entries[1] if len(daily_entries) > 1 else None
+
+    return MetServicePublicData(
+        temperature=_safe_float(obs.get("temperature")),
+        feels_like=_safe_float(obs.get("windChill")),
+        temp_today_high=_safe_float(day0.get("max")),
+        temp_today_low=_safe_float(day0.get("min")),
+        humidity=_safe_int(obs.get("relativeHumidity")),
+        pressure=_safe_float(obs.get("pressure")),
+        pressure_trend=obs.get("pressureTrend"),
+        wind_speed=_safe_float(obs.get("windSpeed")),
+        wind_gust=_safe_float(obs.get("windGustSpeed")),
+        wind_direction=obs.get("windDirection"),
+        wind_strength=obs.get("windDescription"),
+        rainfall=_safe_float(obs.get("rainfall")),
+        condition=_app_condition(day0.get("forecastWord")),
+        forecast_text=day0.get("forecast"),
+        issued_at=day0.get("issuedAtISO"),
+        location_name=result.get("locationName"),
+        uv_message=day0.get("uvMessage") or None,
+        uv_has_alert=(
+            day0["uvHasAlert"] if isinstance(day0.get("uvHasAlert"), bool) else None
+        ),
+        uv_window_start_raw=uv_window_start_raw,
+        uv_window_end_raw=uv_window_end_raw,
+        uv_window_start_at=_parse_clock_time(uv_window_start_raw, day_reference),
+        uv_window_end_at=_parse_clock_time(uv_window_end_raw, day_reference),
+        breakdown_morning=_app_condition(_get(part_day, "morning", "forecastWord")),
+        breakdown_afternoon=_app_condition(_get(part_day, "afternoon", "forecastWord")),
+        breakdown_evening=_app_condition(_get(part_day, "evening", "forecastWord")),
+        breakdown_overnight=_app_condition(_get(part_day, "overnight", "forecastWord")),
+        sunrise=rise_set.get("sunRise"),
+        sunset=rise_set.get("sunSet"),
+        moonrise=rise_set.get("moonRise"),
+        moonset=rise_set.get("moonSet"),
+        sunrise_at=rise_set.get("sunRiseISO"),
+        sunset_at=rise_set.get("sunSetISO"),
+        moonrise_at=rise_set.get("moonRiseISO"),
+        moonset_at=rise_set.get("moonSetISO"),
+        moon_phase=_get(moon_phases, "0", "phase"),
+        moon_phase_date=_round_iso_to_minutes(_get(moon_phases, "0", "dateISO")),
+        moon_phase_current=_moon_phase_current(moon_phases, now),
+        fire_danger=_get(fire, "danger", "dailyObservation"),
+        fire_season=_get(fire, "season", "short"),
+        fire_season_status=(
+            fire_season_status.lower() if isinstance(fire_season_status, str) else None
+        ),
+        fire_season_short=_get(fire, "season", "short"),
+        fire_season_text=_get(fire, "season", "text"),
+        fire_danger_index=_safe_int(_get(fire, "danger", "dailyObservationIndex")),
+        fire_danger_text=_get(fire, "danger", "text"),
+        fire_danger_forecast=_get(day1, "fireWeather", "danger", "forecast"),
+        **_supplementary_fields(extras),
+        tomorrow_condition=tomorrow.condition if tomorrow else None,
+        tomorrow_temp_high=tomorrow.temp_high if tomorrow else None,
+        tomorrow_temp_low=tomorrow.temp_low if tomorrow else None,
+        tomorrow_description=tomorrow.description if tomorrow else None,
+        has_observations=bool(obs),
+        has_breakdown=bool(part_day),
+        hourly_entries=observed_hourly + forecast_hourly,
+        hourly_obs=len(forecast_hourly),
+        hourly_skip=len(observed_hourly),
+        **rain_outlook,
+        daily_entries=daily_entries,
+    )

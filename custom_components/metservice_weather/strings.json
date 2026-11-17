@@ -10,8 +10,8 @@
           "marine_region": "Marine Region"
         },
         "data_description": {
-          "name": "Shown in the integrations list. The device and its entities are named after the selected weather location itself (e.g. \"Napier Temperature\"). Add the integration again to cover more locations.",
-          "location": "The MetService town or rural location weather data is fetched for. Choose the one closest to you.",
+          "name": "Shown in the integrations list. The device and its entities are named after the selected weather location itself (e.g. \"Napier Temperature\"), or after this name when following Home Assistant's location. Add the integration again to cover more locations.",
+          "location": "The MetService town or rural location weather data is fetched for. Choose the one closest to you, or \"Follow Home Assistant's location\" to get the forecast for wherever Home Assistant's location is set, updated as it changes (e.g. by GPS in a vehicle).",
           "marine_region": "Optional. Select the coastal region nearest to you to enable tide times, boating conditions, and surf sensors. You will choose specific stations for each on the next screen. Choose \"None — skip marine data\" if you don't need any of these."
         },
         "sections": {
@@ -47,6 +47,7 @@
       "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
       "invalid_location": "Not a MetService location. Pick one from the list, or check the custom location under Advanced.",
       "location_not_found": "MetService has no page for that custom location. Check the address under Advanced.",
+      "ha_location_not_covered": "MetService has no forecast for Home Assistant's location. Check it is set to somewhere in New Zealand.",
       "tide_location_not_found": "Could not determine the URL for the selected tide station.",
       "boating_location_not_found": "Could not determine the URL for the selected boating location.",
       "surf_location_not_found": "Could not determine the URL for the selected surf location."

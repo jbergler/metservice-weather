@@ -54,6 +54,16 @@ LOCATION_PATH_RE: Final = re.compile(
 API_METRIC: Final = "metric"
 DEFAULT_LOCATION = "/towns-cities/regions/bay-of-plenty/locations/tauranga"
 
+# The MetService app's API forecasts for any coordinates. The key is the one
+# built into the app, the same for every install.
+APP_API_URL = "https://api.metservice.com/mobile/nz"
+APP_API_HEADERS: Final[dict[str, str]] = {
+    "apiKey": "l7xx2a4b9096debf47acb352d84a6ef39461",
+    "Accept-Encoding": "gzip",
+}
+# CONF_LOCATION value for an entry that follows Home Assistant's own location.
+HA_LOCATION: Final = "ha_location"
+
 TEMPUNIT = "temperature"
 LENGTHUNIT = "length"
 SPEEDUNIT = "speed"

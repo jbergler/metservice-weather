@@ -48,6 +48,16 @@ Setup is one screen, or two if you want marine data:
 
 Want more than one town? Add the integration again. Every location gets its own device (you can't add the same one twice).
 
+### 🚐 Following Home Assistant's location
+
+Pick **Follow Home Assistant's location** at the top of the Weather location list and every update fetches the forecast for wherever Home Assistant's own location is set (**Settings → System → General**). If something keeps that location up to date, such as an automation calling `homeassistant.set_location` with GPS coordinates in a campervan or boat, the forecast moves with you.
+
+- The device and its sensors are named after your **Device name**, so `RV` gets you `sensor.rv_temperature` wherever you are.
+- This uses the MetService app's API, which forecasts for any point in New Zealand, rather than the website's town pages. The forecast follows the new location at the next update, within 20 minutes.
+- Station sensors (temperature, wind and the rest) are kept even where there's no nearby station; they read `unknown` there.
+- The app doesn't publish the **UV index** level, so that sensor stays `unknown`. Everything else matches a town entry, and the daily forecast runs 10 days instead of 7, but without the chance of rain.
+- Outside New Zealand, updates fail with a message saying MetService has no forecast there.
+
 <details>
 <summary>Installing by hand</summary>
 

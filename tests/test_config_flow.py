@@ -11,6 +11,7 @@ from homeassistant.data_entry_flow import FlowResultType
 from custom_components.metservice_weather.const import (
     DOMAIN,
     CONF_AUTO_HIDE_SEASONAL,
+    HA_LOCATION,
 )
 from custom_components.metservice_weather.helpers import normalize_location_path
 from custom_components.metservice_weather.config_flow import (
@@ -837,14 +838,18 @@ async def test_reconfigure_custom_location_opens_advanced(hass, mock_marine_sess
 
 
 async def test_setup_form_offers_fetched_locations(hass, mock_marine_session):
-    """The location selector lists the fetched index."""
+    """The location selector offers Home Assistant's location, then the fetched index."""
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
     )
     for key, selector in result["data_schema"].schema.items():
         if key == CONF_LOCATION:
             config = selector.config
-            assert [o["label"] for o in config["options"]] == ["Napier", "Whangārei"]
+            assert [o["label"] for o in config["options"]] == [
+                "Follow Home Assistant's location",
+                "Napier",
+                "Whangārei",
+            ]
             break
     else:
         raise AssertionError("location field missing")
@@ -923,3 +928,62 @@ async def test_fetch_locations_failure_returns_empty():
     session = MagicMock()
     session.get = AsyncMock(side_effect=Exception("network error"))
     assert await async_fetch_locations(session) == []
+
+
+_HA_LOCATION_INPUT = {
+    CONF_NAME: "RV",
+    CONF_LOCATION: HA_LOCATION,
+    CONF_MARINE_REGION: "skip",
+    SECTION_ADVANCED_OPTIONS: {},
+}
+
+
+async def test_ha_location_creates_app_entry(hass, mock_marine_session):
+    """Following Home Assistant's location checks the app API covers it, then saves the entry."""
+    session, _ = mock_marine_session
+    hass.config.latitude, hass.config.longitude = -36.90012, 174.60049
+    result = await hass.config_entries.flow.async_init(
+        DOMAIN, context={"source": config_entries.SOURCE_USER}
+    )
+
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"], _HA_LOCATION_INPUT
+    )
+
+    assert result["type"] == FlowResultType.CREATE_ENTRY
+    assert result["data"][CONF_LOCATION] == HA_LOCATION
+    assert result["data"]["api"] == "app"
+    assert result["result"].unique_id == f"{DOMAIN}-{HA_LOCATION}"
+    assert (
+        session.get.call_args.args[0]
+        == "https://api.metservice.com/mobile/nz/weatherData/-36.9/174.6"
+    )
+
+
+@pytest.mark.parametrize(
+    ("app_response", "error"),
+    [
+        (MagicMock(status=404), "ha_location_not_covered"),
+        (MagicMock(status=503), "cannot_connect"),
+        (Exception("network down"), "cannot_connect"),
+    ],
+)
+async def test_ha_location_not_served_shows_error(
+    hass, mock_marine_session, app_response, error
+):
+    """A point MetService doesn't cover, or an unreachable API, keeps the form open."""
+    session, marine_resp = mock_marine_session
+    result = await hass.config_entries.flow.async_init(
+        DOMAIN, context={"source": config_entries.SOURCE_USER}
+    )
+    if isinstance(app_response, MagicMock):
+        app_response.__aenter__ = AsyncMock(return_value=app_response)
+        app_response.__aexit__ = AsyncMock(return_value=None)
+    session.get = AsyncMock(side_effect=[app_response])
+
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"], _HA_LOCATION_INPUT
+    )
+
+    assert result["type"] == FlowResultType.FORM
+    assert result["errors"] == {"base": error}

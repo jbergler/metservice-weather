@@ -19,6 +19,28 @@ LOCATIONS = {
     "kumeu": "/rural/regions/auckland/locations/kumeu",
 }
 
+# Coordinates for the app API, which follows Home Assistant's location.
+APP_URL = "https://api.metservice.com/mobile/nz"
+APP_HEADERS = {
+    "apiKey": "l7xx2a4b9096debf47acb352d84a6ef39461",
+    "Accept-Encoding": "gzip",
+}
+APP_LOCATIONS = {
+    "waitakere": (-36.9, 174.6),
+}
+# Bulky app sections the integration never reads.
+APP_UNUSED_KEYS = (
+    "adsV2",
+    "advertSettings",
+    "advertTargeting",
+    "commuteForecast",
+    "imagery",
+    "petForecast",
+    "settings",
+    "trafficCams",
+    "videos",
+)
+
 HEADERS = {
     "Accept-Encoding": "gzip",
     "User-Agent": (
@@ -218,21 +240,46 @@ async def capture_location(session, fixtures_dir, name, location):
     print(f"Saved {daily_path} ({daily_path.stat().st_size / 1024:.0f} KB)")
 
 
+async def capture_app_location(session, fixtures_dir, name, coordinates):
+    """Capture the app API's weatherData result for one point."""
+    lat, lng = coordinates
+    url = f"{APP_URL}/weatherData/{lat}/{lng}"
+    print(f"Fetching {url}")
+    async with async_timeout.timeout(15):
+        resp = await session.get(url, headers=APP_HEADERS)
+        resp.raise_for_status()
+        result = (await resp.json(content_type=None))["result"]
+    for key in APP_UNUSED_KEYS:
+        result.pop(key, None)
+    for module in result.get("genericModules") or []:
+        module.pop("details", None)
+
+    path = fixtures_dir / f"{name}_app_weather.json"
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(result, f, indent=2, ensure_ascii=False)
+    print(f"Saved {path} ({path.stat().st_size / 1024:.0f} KB)")
+
+
 async def main():
     """Capture fixtures for the locations named on the command line (default: all)."""
     fixtures_dir = Path(__file__).parent.parent / "tests" / "fixtures"
     fixtures_dir.mkdir(parents=True, exist_ok=True)
 
-    wanted = sys.argv[1:] or list(LOCATIONS)
-    unknown = [n for n in wanted if n not in LOCATIONS]
+    known = [*LOCATIONS, *APP_LOCATIONS]
+    wanted = sys.argv[1:] or known
+    unknown = [n for n in wanted if n not in known]
     if unknown:
-        raise SystemExit(
-            f"Unknown location name(s): {unknown}; known: {list(LOCATIONS)}"
-        )
+        raise SystemExit(f"Unknown location name(s): {unknown}; known: {known}")
 
     connector = aiohttp.TCPConnector(limit=10)
     async with aiohttp.ClientSession(connector=connector) as session:
         for name in wanted:
+            if name in APP_LOCATIONS:
+                print(f"\n=== Capturing {name} {APP_LOCATIONS[name]} (app API) ===")
+                await capture_app_location(
+                    session, fixtures_dir, name, APP_LOCATIONS[name]
+                )
+                continue
             print(f"\n=== Capturing {name} ({LOCATIONS[name]}) ===")
             await capture_location(session, fixtures_dir, name, LOCATIONS[name])
 

@@ -17,6 +17,7 @@ from .coordinator import WeatherUpdateCoordinator, WeatherUpdateCoordinatorConfi
 from .entity import async_register_location_device
 from .const import (
     DOMAIN,
+    HA_LOCATION,
     LOCATION_PATH_RE,
     PUBLIC_URL,
     PUBLIC_WARNINGS_URL,
@@ -50,7 +51,7 @@ def _check_legacy_entry(hass: HomeAssistant, entry: MetServiceConfigEntry) -> No
         location = entry.data.get(CONF_LOCATION)
         if api == "mobile":
             reason = "the private mobile API, which was removed in v1.0.0"
-        elif not _is_location_path(location):
+        elif location != HA_LOCATION and not _is_location_path(location):
             reason = f"an unrecognised location value ({location!r})"
         else:
             ir.async_delete_issue(hass, DOMAIN, issue_id)

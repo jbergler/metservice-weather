@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 import time
 from pathlib import Path
@@ -11,6 +12,7 @@ import aiohttp
 import pytest
 from homeassistant.helpers.update_coordinator import UpdateFailed
 
+from custom_components.metservice_weather.const import HA_LOCATION
 from custom_components.metservice_weather.coordinator import (
     MIN_TIME_BETWEEN_UPDATES,
     RETRY_INTERVAL,
@@ -1288,3 +1290,190 @@ async def test_get_public_weather_tomorrow_extraction_exception_silenced(hass):
     result = await coord.get_public_weather()
     assert isinstance(result, MetServicePublicData)
     assert result.tomorrow_condition is None
+
+
+# ---------------------------------------------------------------------------
+# Following Home Assistant's location through the app API
+# ---------------------------------------------------------------------------
+
+_APP_RESULT = _load("waitakere_app_weather.json")
+
+
+def _make_app_coordinator(hass) -> WeatherUpdateCoordinator:
+    config = _make_config()
+    config.location = HA_LOCATION
+    config.location_name = "RV"
+    return WeatherUpdateCoordinator(hass, config)
+
+
+def _app_response(result, status=200):
+    resp = _mock_response({"result": result}, status=status)
+    resp.raise_for_status = MagicMock()
+    return resp
+
+
+def _app_session(*responses) -> MagicMock:
+    session = MagicMock()
+    session.get = AsyncMock(side_effect=list(responses))
+    return session
+
+
+async def test_app_refresh_fetches_wherever_home_assistant_is_now(hass):
+    """Each refresh asks the app API about Home Assistant's location at that moment."""
+    coord = _make_app_coordinator(hass)
+    queenstown = copy.deepcopy(_APP_RESULT)
+    queenstown["locationName"] = "Queenstown"
+    queenstown["warnings"]["localWarningsUrl"] = "/mobile/nz/warnings/queenstown"
+    coord._session = _app_session(
+        _app_response(_APP_RESULT),
+        _mock_response({"warnings": []}),
+        _app_response(queenstown),
+        _mock_response({"warnings": []}),
+    )
+
+    hass.config.latitude, hass.config.longitude = -36.90012, 174.60049
+    await coord.async_refresh()
+    assert coord.data.location_name == "Waitakere"
+
+    hass.config.latitude, hass.config.longitude = -45.0312, 168.6626
+    await coord.async_refresh()
+    assert coord.data.location_name == "Queenstown"
+
+    urls = [call.args[0] for call in coord._session.get.call_args_list]
+    assert urls == [
+        "https://api.metservice.com/mobile/nz/weatherData/-36.9/174.6",
+        "https://www.metservice.com/publicData/webdata/warnings-service/urban/waitakere",
+        "https://api.metservice.com/mobile/nz/weatherData/-45.031/168.663",
+        "https://www.metservice.com/publicData/webdata/warnings-service/urban/queenstown",
+    ]
+    assert coord._session.get.call_args_list[0].kwargs["headers"]["apiKey"]
+
+
+async def test_app_warnings_use_the_rural_area_when_the_app_says_so(hass):
+    """A "?type=rural" warnings link maps to the rural warnings-service area."""
+    coord = _make_app_coordinator(hass)
+    rural = copy.deepcopy(_APP_RESULT)
+    rural["warnings"]["localWarningsUrl"] = "/mobile/nz/warnings/queenstown?type=rural"
+    warnings = {"warnings": [{"name": "Heavy Snow Watch", "text": "Snow"}]}
+    coord._session = _app_session(_app_response(rural), _mock_response(warnings))
+
+    result = await coord.get_app_weather()
+
+    assert coord._session.get.call_args_list[1].args[0].endswith("/rural/queenstown")
+    assert result.warnings_list == [
+        {"name": "Heavy Snow Watch", "text": "Snow", "threat_period": ""}
+    ]
+
+
+async def test_app_pollen_and_drying_come_from_the_app_modules(hass):
+    """The app's allergens and laundry modules feed the pollen and drying sensors."""
+    coord = _make_app_coordinator(hass)
+    result = copy.deepcopy(_APP_RESULT)
+    result["genericModules"] = [
+        {
+            "id": "laundry",
+            "sections": [
+                {
+                    "paragraphs": [
+                        {
+                            "lines": [
+                                {"colour": "GREEN", "markdown": "Morning: 1 - 3 hrs"},
+                                {"colour": "RED", "markdown": "Afternoon: Wet"},
+                            ]
+                        }
+                    ]
+                }
+            ],
+        },
+        {
+            "id": "allergens",
+            "sections": [
+                {
+                    "paragraphs": [
+                        {
+                            "lines": [
+                                {"colour": "RED", "markdown": "High"},
+                                {"markdown": "Early Grasses, Mid season Grasses"},
+                                {"colour": "ORANGE", "markdown": "Moderate"},
+                                {"markdown": "Plantain, Birch"},
+                            ]
+                        }
+                    ]
+                }
+            ],
+        },
+    ]
+    coord._session = _app_session(
+        _app_response(result), _mock_response({"warnings": []})
+    )
+
+    data = await coord.get_app_weather()
+
+    assert data.pollen_state == "high"
+    assert data.pollen_active == {
+        "high": ["Early Grasses", "Mid season Grasses"],
+        "moderate": ["Plantain", "Birch"],
+    }
+    assert data.pollen_level == "High"
+    assert data.drying_morning == "1 - 3 hrs"
+    assert data.drying_afternoon == "Wet"
+
+
+async def test_app_without_laundry_module_leaves_drying_unknown(hass):
+    """No laundry module means no drying data rather than a made-up "Today"."""
+    coord = _make_app_coordinator(hass)
+    result = copy.deepcopy(_APP_RESULT)
+    result["genericModules"] = []
+    coord._session = _app_session(
+        _app_response(result), _mock_response({"warnings": []})
+    )
+
+    data = await coord.get_app_weather()
+
+    assert data.drying_next_good_day is None
+    assert data.pollen_state is None
+
+
+async def test_app_location_outside_new_zealand_fails_update(hass):
+    """The app API's 404 for a point it doesn't cover fails the update with a pointer to the cause."""
+    coord = _make_app_coordinator(hass)
+    hass.config.latitude, hass.config.longitude = -33.87, 151.21
+    coord._session = _app_session(_app_response(None, status=404))
+
+    with pytest.raises(UpdateFailed, match="New Zealand"):
+        await coord.get_app_weather()
+
+
+async def test_app_response_without_result_fails_update(hass):
+    """A body without a result object is a validation failure, not a crash."""
+    coord = _make_app_coordinator(hass)
+    coord._session = _app_session(_app_response(None))
+
+    with pytest.raises(UpdateFailed, match="No weather data"):
+        await coord.get_app_weather()
+
+
+async def test_app_response_without_warnings_area_fails_update(hass):
+    """Without a warnings area the update fails rather than reporting no warnings."""
+    coord = _make_app_coordinator(hass)
+    result = copy.deepcopy(_APP_RESULT)
+    result["warnings"] = {}
+    coord._session = _app_session(_app_response(result))
+
+    with pytest.raises(UpdateFailed, match="warnings area"):
+        await coord.get_app_weather()
+
+
+async def test_app_fetch_includes_configured_marine_data(hass):
+    """Marine stations are fixed URLs, fetched the same way when following the location."""
+    coord = _make_app_coordinator(hass)
+    coord._tide_url = "https://example.invalid/tides"
+    coord._session = _app_session(
+        _app_response(_APP_RESULT), _mock_response({"warnings": []})
+    )
+    tides = [{"time": "2026-11-17T11:34:00+13:00", "type": "HIGH"}]
+
+    with patch.object(coord, "get_tides", AsyncMock(return_value=tides)):
+        data = await coord.get_app_weather()
+
+    assert data.tides == tides
